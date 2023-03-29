@@ -1,19 +1,153 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        json = 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+
+        springboot_version = '3.0.4'
+
+        springboot_anno = 'org.springframework.boot:spring-boot-configuration-processor'
+        springboot_web = ['org.springframework.boot:spring-boot-starter-web'] // , 'org.springframework.boot:spring-boot-starter-security'
+        springboot_validation = 'org.springframework.boot:spring-boot-starter-validation'
+        springboot_jpa = 'org.springframework.boot:spring-boot-starter-data-jpa'
+        springboot_querydsl_impl = 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+        springboot_querydsl_anno = ['com.querydsl:querydsl-apt:5.0.0:jakarta', 'jakarta.annotation:jakarta.annotation-api', 'jakarta.persistence:jakarta.persistence-api']
+
+        springboot_test = 'org.springframework.boot:spring-boot-starter-test'
+        springboot_mockito = ['org.mockito:mockito-junit-jupiter:3.11.2', 'org.mockito:mockito-core:3.11.2']
+
+        mysql = 'com.mysql:mysql-connector-j:8.0.32'
+    }
+}
+
 plugins {
     id 'java'
-}
-
-group 'kr.hs.dgsw.cns'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    id 'java-library'
+    id 'java-gradle-plugin'
+    id 'jacoco'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = '0.8.8'
+    reportsDir = file("$buildDir/jacocoReports")
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        csv.enabled true
+        xml.enabled false
+    }
+
+    def Qdomains = []
+    for (qPattern in "**/QA".."**/QZ") {
+        Qdomains.add(qPattern + "*")
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [
+                            "**/*Application*",
+                            "**/*Configuration*",
+                            "**/*Properties*",
+                            "**/*Exception*"
+                    ] + Qdomains)
+                })
+        )
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    def Qdomains = []
+    for (qPattern in '*.QA'..'*.QZ') {
+        Qdomains.add(qPattern + '*')
+    }
+
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 200
+            }
+
+            excludes = [
+                    "**.*Application*",
+                    "**.*Configuration*",
+                    "**.*Properties*",
+                    "**.*Exception*"
+            ] + Qdomains
+        }
+    }
+}
+
+
+group 'kr.hs.dgsw.cns'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'jacoco'
+
+    group 'kr.hs.dgsw.cns'
+    version '1.0.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+        testImplementation 'org.projectlombok:lombok:1.18.20'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    }
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+sourceSets {
+    main.java.srcDirs += [ querydslDir ]
+}
+
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+}
+
+clean.doLast {
+    file(querydslDir).deleteDir()
 }

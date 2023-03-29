@@ -1,0 +1,20 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ida_prototype_db
+    username: root
+    password: CoffeeMaster
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+    generate-ddl: true
+
+

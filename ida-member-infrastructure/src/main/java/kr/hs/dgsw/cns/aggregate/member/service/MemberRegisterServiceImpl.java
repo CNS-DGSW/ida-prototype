@@ -1,0 +1,48 @@
+package kr.hs.dgsw.cns.aggregate.member.service;
+
+import kr.hs.dgsw.cns.aggregate.applicant.dao.ApplicantCommandRepository;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Privacy;
+import kr.hs.dgsw.cns.aggregate.applicant.mapper.ApplicantMapper;
+import kr.hs.dgsw.cns.aggregate.member.dao.MemberCommandRepository;
+import kr.hs.dgsw.cns.aggregate.member.domain.Member;
+import kr.hs.dgsw.cns.aggregate.member.domain.value.Password;
+import kr.hs.dgsw.cns.aggregate.member.mapper.MemberMapper;
+import kr.hs.dgsw.cns.aggregate.member.spi.service.MemberRegisterService;
+import kr.hs.dgsw.cns.aggregate.member.dto.MemberRegisterRequest;
+import kr.hs.dgsw.cns.domain.value.PhoneNumber;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class MemberRegisterServiceImpl implements MemberRegisterService {
+
+    private final MemberMapper memberMapper;
+    private final ApplicantMapper applicantMapper;
+
+    private final MemberCommandRepository memberCommandRepository;
+    private final ApplicantCommandRepository applicantCommandRepository;
+
+    @Override
+    public void register(MemberRegisterRequest registerRequest) {
+        Member member = Member.builder()
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .password(new Password(registerRequest.getPassword()))
+                .build();
+        Privacy privacy = Privacy.builder()
+                .birth(registerRequest.getBirth())
+                .phone(new PhoneNumber(registerRequest.getTelephone()))
+                .build();
+        Applicant applicant = Applicant.builder()
+                .id(member.getId())
+                .privacy(privacy)
+                .build();
+
+        memberCommandRepository.save(memberMapper.domainToEntity(member));
+        applicantCommandRepository.save(applicantMapper.domainToEntity(applicant));
+    }
+}

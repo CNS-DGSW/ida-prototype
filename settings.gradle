@@ -1,2 +1,9 @@
 rootProject.name = 'IdaPrototype'
+include 'ida-common'
+include 'ida-member-domain'
+include 'ida-member-infrastructure'
+include 'ida-http-application'
+include 'ida-domain-common'
+include 'ida-infrastructure-common'
+include 'ida-applicant-domain'
 
