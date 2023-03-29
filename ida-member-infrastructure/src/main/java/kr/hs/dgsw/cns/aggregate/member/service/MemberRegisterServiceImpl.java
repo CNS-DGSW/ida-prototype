@@ -7,6 +7,8 @@ import kr.hs.dgsw.cns.aggregate.applicant.mapper.ApplicantMapper;
 import kr.hs.dgsw.cns.aggregate.member.dao.MemberCommandRepository;
 import kr.hs.dgsw.cns.aggregate.member.domain.Member;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Password;
+import kr.hs.dgsw.cns.aggregate.member.entity.MemberEntity;
+import kr.hs.dgsw.cns.aggregate.member.mapper.MemberIdMapper;
 import kr.hs.dgsw.cns.aggregate.member.mapper.MemberMapper;
 import kr.hs.dgsw.cns.aggregate.member.spi.service.MemberRegisterService;
 import kr.hs.dgsw.cns.aggregate.member.dto.MemberRegisterRequest;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberRegisterServiceImpl implements MemberRegisterService {
 
     private final MemberMapper memberMapper;
+    private final MemberIdMapper idMapper;
     private final ApplicantMapper applicantMapper;
 
     private final MemberCommandRepository memberCommandRepository;
@@ -28,21 +31,23 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
     @Override
     public void register(MemberRegisterRequest registerRequest) {
-        Member member = Member.builder()
-                .name(registerRequest.getName())
-                .email(registerRequest.getEmail())
-                .password(new Password(registerRequest.getPassword()))
-                .build();
+        MemberEntity member = memberMapper.domainToEntity(
+                Member.builder()
+                        .name(registerRequest.getName())
+                        .email(registerRequest.getEmail())
+                        .password(new Password(registerRequest.getPassword()))
+                        .build()
+        );
         Privacy privacy = Privacy.builder()
                 .birth(registerRequest.getBirth())
                 .phone(new PhoneNumber(registerRequest.getTelephone()))
                 .build();
         Applicant applicant = Applicant.builder()
-                .id(member.getId())
+                .id(idMapper.entityToDomain(member.getId()))
                 .privacy(privacy)
                 .build();
 
-        memberCommandRepository.save(memberMapper.domainToEntity(member));
+        memberCommandRepository.save(member);
         applicantCommandRepository.save(applicantMapper.domainToEntity(applicant));
     }
 }

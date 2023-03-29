@@ -38,11 +38,8 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
     @Override
     public ApplicantEntity domainToEntity(Applicant domain) {
         return ApplicantEntity.builder()
-                .memberId(IdGenerator.isNull(domain.getId()) ? MemberId.of(IdGenerator.generateUUIDWithLong())
-                        : MemberId.of(domain.getId().getId()))
-                .information(
-                        IdGenerator.isNull(domain.getPrivacy()) ? null : INFORMATION_MAPPER.domainToEntity(domain.getPrivacy())
-                )
+                .memberId(MemberId.of(domain.getId().getId()))
+                .information(INFORMATION_MAPPER.domainToEntity(domain.getPrivacy()))
                 .score(
                         IdGenerator.isNull(domain.getScore()) ? null : SCORE_MAPPER.domainToEntity(domain.getScore())
                 )
