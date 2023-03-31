@@ -3,7 +3,7 @@ package kr.hs.dgsw.cns.aggregate.applicant.entity;
 import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.AdmissionType;
 import kr.hs.dgsw.cns.aggregate.applicant.entity.value.PersonalInformation;
-import kr.hs.dgsw.cns.global.embedd.MemberId;
+import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
 import lombok.*;
 
 @Entity
@@ -18,14 +18,14 @@ public class ApplicantEntity {
     @AttributeOverrides(
             @AttributeOverride(name = "id", column = @Column(name = "applicant_id"))
     )
-    private MemberId memberId;
+    private EmbeddedMemberId embeddedMemberId;
 
     @Embedded
     private PersonalInformation information;
 
     @OneToOne
     @JoinColumn(name = "score_score_id")
-    private Score score;
+    private AbstractScore score;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

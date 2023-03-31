@@ -2,7 +2,6 @@ package kr.hs.dgsw.cns.aggregate.member.service;
 
 import kr.hs.dgsw.cns.aggregate.applicant.dao.ApplicantCommandRepository;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
-import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Privacy;
 import kr.hs.dgsw.cns.aggregate.applicant.mapper.ApplicantMapper;
 import kr.hs.dgsw.cns.aggregate.member.dao.MemberCommandRepository;
 import kr.hs.dgsw.cns.aggregate.member.domain.Member;
@@ -12,7 +11,6 @@ import kr.hs.dgsw.cns.aggregate.member.mapper.MemberIdMapper;
 import kr.hs.dgsw.cns.aggregate.member.mapper.MemberMapper;
 import kr.hs.dgsw.cns.aggregate.member.spi.service.MemberRegisterService;
 import kr.hs.dgsw.cns.aggregate.member.dto.MemberRegisterRequest;
-import kr.hs.dgsw.cns.domain.value.PhoneNumber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,18 +31,12 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     public void register(MemberRegisterRequest registerRequest) {
         MemberEntity member = memberMapper.domainToEntity(
                 Member.builder()
-                        .name(registerRequest.getName())
                         .email(registerRequest.getEmail())
                         .password(new Password(registerRequest.getPassword()))
                         .build()
         );
-        Privacy privacy = Privacy.builder()
-                .birth(registerRequest.getBirth())
-                .phone(new PhoneNumber(registerRequest.getTelephone()))
-                .build();
         Applicant applicant = Applicant.builder()
                 .id(idMapper.entityToDomain(member.getId()))
-                .privacy(privacy)
                 .build();
 
         memberCommandRepository.save(member);

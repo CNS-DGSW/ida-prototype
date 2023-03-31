@@ -14,28 +14,28 @@ import java.util.Objects;
 @Getter
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberId implements Serializable {
+public class SchoolCodeVO implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -7305105972131878927L;
+    private static final long serialVersionUID = 6409566597722370789L;
 
-    @Column(name = "member_id")
-    private Long id;
+    @Column(name = "school_code")
+    private int code;
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        MemberId memberId = (MemberId) obj;
-        return Objects.equals(id, memberId.id);
+        SchoolCodeVO school = (SchoolCodeVO) obj;
+        return code == school.code;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(code);
     }
 
-    public static MemberId of(long id) {
-        return new MemberId(id);
+    public static SchoolCodeVO of(int code) {
+        return new SchoolCodeVO(code);
     }
 }

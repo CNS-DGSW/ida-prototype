@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Privacy {
 
+    private final String name;
+
     private final LocalDate birth;
 
     private final Gender gender;
@@ -26,8 +28,5 @@ public class Privacy {
     private ParentInfo parentInfo;
 
     private Merit merit;
-
-
-
 
 }

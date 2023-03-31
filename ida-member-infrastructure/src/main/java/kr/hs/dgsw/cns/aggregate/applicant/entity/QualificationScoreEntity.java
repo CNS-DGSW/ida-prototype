@@ -1,7 +1,7 @@
 package kr.hs.dgsw.cns.aggregate.applicant.entity;
 
 import jakarta.persistence.*;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.GedGrade;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.GedGradeVO;
 import lombok.*;
 
 import java.util.LinkedList;
@@ -13,24 +13,24 @@ import java.util.List;
 @Entity
 @Getter
 @DiscriminatorValue("Q")
-public class QualificationScore extends Score {
+public class QualificationScoreEntity extends AbstractScore {
 
     @OrderColumn(name = "ged_idx")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "ged_grade", joinColumns = @JoinColumn(name = "score_id"))
-    private List<GedGrade> gedGrades;
+    private List<GedGradeVO> gedGrades;
 
-    public QualificationScore(Long id, List<GedGrade> gedGrades) {
+    public QualificationScoreEntity(Long id, List<GedGradeVO> gedGrades) {
         super(id);
         this.gedGrades = gedGrades;
     }
 
-    public QualificationScore(Long id) {
+    public QualificationScoreEntity(Long id) {
         super(id);
         this.gedGrades = new LinkedList<>();
     }
 
-    protected QualificationScore() {
+    protected QualificationScoreEntity() {
 
     }
 }

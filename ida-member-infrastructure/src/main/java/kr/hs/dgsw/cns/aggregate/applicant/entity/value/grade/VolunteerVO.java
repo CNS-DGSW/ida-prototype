@@ -1,10 +1,9 @@
 package kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade;
 
 import jakarta.persistence.*;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Grade;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Point;
-import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Subject;
 import kr.hs.dgsw.cns.aggregate.converter.PointConverter;
-import kr.hs.dgsw.cns.aggregate.converter.SubjectConverter;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,16 +15,15 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GedGrade implements Serializable {
+public class VolunteerVO implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -5520222159156087172L;
+    private static final long serialVersionUID = -6186140834280014288L;
 
     @Column(nullable = false)
-    @Convert(converter = SubjectConverter.class)
-    private Subject subject;
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
-    @Column(nullable = false)
     @Convert(converter = PointConverter.class)
     private Point point;
 

@@ -2,9 +2,9 @@ package kr.hs.dgsw.cns.aggregate.applicant.entity;
 
 import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Point;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.Attendance;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.SchoolGrade;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.Volunteer;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.AttendanceVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.SchoolGradeVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.VolunteerVO;
 import kr.hs.dgsw.cns.aggregate.converter.PointConverter;
 import lombok.Getter;
 
@@ -16,39 +16,39 @@ import java.util.List;
 @Entity
 @Getter
 @DiscriminatorValue("S")
-public class SchoolScore extends Score {
+public class SchoolScoreEntity extends AbstractScore {
 
     @OrderColumn(name = "school_idx")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "school_grade", joinColumns = @JoinColumn(name = "score_id"))
-    private List<SchoolGrade> schoolGrades;
+    private List<SchoolGradeVO> schoolGrades;
 
     @OrderColumn(name = "attendance_idx")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "attendance", joinColumns = @JoinColumn(name = "score_id"))
-    private List<Attendance> attendances;
+    private List<AttendanceVO> attendances;
 
     @OrderColumn(name = "volunteer_idx")
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "volunteer", joinColumns = @JoinColumn(name = "score_id"))
-    private List<Volunteer> volunteers;
+    private List<VolunteerVO> volunteers;
 
     @Convert(converter = PointConverter.class)
     private Point prize;
 
-    public SchoolScore(Long id, List<SchoolGrade> schoolGrades, List<Attendance> attendances,
-                       List<Volunteer> volunteers, Point prize) {
+    public SchoolScoreEntity(Long id, List<SchoolGradeVO> schoolGradeVOS, List<AttendanceVO> attendanceVOS,
+                             List<VolunteerVO> volunteerVOS, Point prize) {
         super(id);
-        this.schoolGrades = schoolGrades;
-        this.attendances = attendances;
-        this.volunteers = volunteers;
+        this.schoolGrades = schoolGradeVOS;
+        this.attendances = attendanceVOS;
+        this.volunteers = volunteerVOS;
         this.prize = prize;
     }
 
-    public SchoolScore(Long id) {
+    public SchoolScoreEntity(Long id) {
         super(id);
     }
 
-    public SchoolScore() {
+    public SchoolScoreEntity() {
     }
 }

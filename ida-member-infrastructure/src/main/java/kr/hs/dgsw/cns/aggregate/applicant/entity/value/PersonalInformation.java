@@ -5,7 +5,7 @@ import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Gender;
 import kr.hs.dgsw.cns.aggregate.converter.PhoneNumberConverter;
 import kr.hs.dgsw.cns.domain.value.PhoneNumber;
 import kr.hs.dgsw.cns.global.embedd.Merit;
-import kr.hs.dgsw.cns.global.embedd.SchoolCode;
+import kr.hs.dgsw.cns.global.embedd.SchoolCodeVO;
 import lombok.*;
 
 import java.io.Serial;
@@ -21,24 +21,24 @@ public class PersonalInformation implements Serializable {
     @Serial
     private static final long serialVersionUID = 5223215781809764441L;
 
-    @Column(nullable = false)
+    private String name;
+
     private LocalDate birth;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
     @Convert(converter = PhoneNumberConverter.class)
     private PhoneNumber phone;
 
     @Embedded
-    private SchoolCode school;
+    private SchoolCodeVO school;
 
     @Embedded
-    private Address address;
+    private AddressVO address;
 
     @Embedded
-    private Parent parent;
+    private ParentVO parent;
 
     @Embedded
     private Merit merit;

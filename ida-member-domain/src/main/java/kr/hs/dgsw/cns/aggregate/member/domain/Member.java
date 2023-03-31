@@ -14,8 +14,6 @@ public class Member {
 
     private final String email;
 
-    private final String name;
-
     private Password password;
 
     private Role role;

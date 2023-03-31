@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.member.converter.PasswordConverter;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Password;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Role;
-import kr.hs.dgsw.cns.global.embedd.MemberId;
+import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
 import lombok.*;
 
 @Entity
@@ -16,11 +16,9 @@ import lombok.*;
 public class MemberEntity {
 
     @EmbeddedId
-    private MemberId id;
+    private EmbeddedMemberId id;
 
     private String email;
-
-    private String name;
 
     @Convert(converter = PasswordConverter.class)
     private Password password;

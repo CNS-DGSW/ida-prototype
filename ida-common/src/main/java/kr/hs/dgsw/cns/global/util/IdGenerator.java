@@ -9,8 +9,4 @@ public final class IdGenerator {
     public static long generateUUIDWithLong() {
         return System.currentTimeMillis();
     }
-
-    public static <T> boolean isNull(T t) {
-        return t == null;
-    }
 }

@@ -2,26 +2,33 @@ package kr.hs.dgsw.cns.aggregate.applicant.mapper;
 
 import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.GedScore;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.SchoolScore;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.Score;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Address;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.ParentInfo;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Privacy;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.AdmissionType;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.AttendancePoint;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.GedGrade;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.SchoolGrade;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.VolunteerPoint;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.AbstractScore;
 import kr.hs.dgsw.cns.aggregate.applicant.entity.ApplicantEntity;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.QualificationScore;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.SchoolScore;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.Parent;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.QualificationScoreEntity;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.SchoolScoreEntity;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.AddressVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.ParentVO;
 import kr.hs.dgsw.cns.aggregate.applicant.entity.value.PersonalInformation;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.Attendance;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.GedGrade;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.SchoolGrade;
-import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.Volunteer;
-import kr.hs.dgsw.cns.global.embedd.MemberId;
-import kr.hs.dgsw.cns.global.embedd.SchoolCode;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.AttendanceVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.GedGradeVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.SchoolGradeVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade.VolunteerVO;
+import kr.hs.dgsw.cns.domain.MemberId;
+import kr.hs.dgsw.cns.domain.SchoolCode;
+import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
+import kr.hs.dgsw.cns.global.embedd.SchoolCodeVO;
 import kr.hs.dgsw.cns.global.mapper.Mapper;
-import kr.hs.dgsw.cns.global.util.IdGenerator;
+import kr.hs.dgsw.cns.global.util.MapperUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -38,22 +45,20 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
     @Override
     public ApplicantEntity domainToEntity(Applicant domain) {
         return ApplicantEntity.builder()
-                .memberId(MemberId.of(domain.getId().getId()))
-                .information(INFORMATION_MAPPER.domainToEntity(domain.getPrivacy()))
-                .score(
-                        IdGenerator.isNull(domain.getScore()) ? null : SCORE_MAPPER.domainToEntity(domain.getScore())
-                )
-                .type(IdGenerator.isNull(domain.getAdmissionType()) ? AdmissionType.NONE : domain.getAdmissionType())
+                .embeddedMemberId(EmbeddedMemberId.of(domain.getId().getId()))
+                .information(MapperUtils.convertToEntityIsNull(domain.getPrivacy(), INFORMATION_MAPPER))
+                .score(MapperUtils.convertToEntityIsNull(domain.getScore(), SCORE_MAPPER))
+                .type(MapperUtils.isNull(domain.getAdmissionType()) ? AdmissionType.NONE : domain.getAdmissionType())
                 .build();
     }
 
     @Override
     public Applicant entityToDomain(ApplicantEntity entity) {
         return Applicant.builder()
-                .id(new kr.hs.dgsw.cns.domain.MemberId(entity.getMemberId().getId()))
-                .privacy(INFORMATION_MAPPER.entityToDomain(entity.getInformation()))
-                .score(SCORE_MAPPER.entityToDomain(entity.getScore()))
-                .admissionType(entity.getType())
+                .id(new MemberId(entity.getEmbeddedMemberId().getId()))
+                .privacy(MapperUtils.convertToDomainIsNull(entity.getInformation(), INFORMATION_MAPPER))
+                .score(MapperUtils.convertToDomainIsNull(entity.getScore(), SCORE_MAPPER))
+                .admissionType(MapperUtils.isNull(entity.getType()) ? AdmissionType.NONE : entity.getType())
                 .build();
     }
 
@@ -62,38 +67,34 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
         @Override
         public PersonalInformation domainToEntity(Privacy domain) {
             return PersonalInformation.builder()
+                    .name(domain.getName())
                     .birth(domain.getBirth())
                     .gender(domain.getGender())
                     .phone(domain.getPhone())
-                    .school(
-                            IdGenerator.isNull(domain.getSchool()) ? null : SchoolCode.of(domain.getSchool().getCode())
-                    )
-                    .address(
-                            IdGenerator.isNull(domain.getAddress()) ? null : ADDRESS_MAPPER.domainToEntity(domain.getAddress())
-                    )
-                    .parent(
-                            IdGenerator.isNull(domain.getParentInfo()) ? null : PARENT_MAPPER.domainToEntity(domain.getParentInfo())
-                    )
+                    .school(MapperUtils.isNull(domain.getSchool()) ? null : SchoolCodeVO.of(domain.getSchool().getCode()))
+                    .address(MapperUtils.convertToEntityIsNull(domain.getAddress(), ADDRESS_MAPPER))
+                    .parent(MapperUtils.convertToEntityIsNull(domain.getParentInfo(), PARENT_MAPPER))
                     .build();
         }
 
         @Override
         public Privacy entityToDomain(PersonalInformation entity) {
             return Privacy.builder()
+                    .name(entity.getName())
                     .birth(entity.getBirth())
                     .gender(entity.getGender())
                     .phone(entity.getPhone())
-                    .school(new kr.hs.dgsw.cns.domain.SchoolCode(entity.getSchool().getCode()))
-                    .address(ADDRESS_MAPPER.entityToDomain(entity.getAddress()))
-                    .parentInfo(PARENT_MAPPER.entityToDomain(entity.getParent()))
+                    .school(MapperUtils.isNull(entity.getSchool()) ? null : new SchoolCode(entity.getSchool().getCode()))
+                    .address(MapperUtils.convertToDomainIsNull(entity.getAddress(), ADDRESS_MAPPER))
+                    .parentInfo(MapperUtils.convertToDomainIsNull(entity.getParent(), PARENT_MAPPER))
                     .build();
         }
     }
 
-    static class AddressMapper implements Mapper<Address, kr.hs.dgsw.cns.aggregate.applicant.entity.value.Address> {
+    static class AddressMapper implements Mapper<Address, AddressVO> {
         @Override
-        public kr.hs.dgsw.cns.aggregate.applicant.entity.value.Address domainToEntity(Address domain) {
-            return kr.hs.dgsw.cns.aggregate.applicant.entity.value.Address.builder()
+        public AddressVO domainToEntity(Address domain) {
+            return AddressVO.builder()
                     .detailAddress(domain.getDetailAddress())
                     .streetAddress(domain.getStreetAddress())
                     .zipCode(domain.getZipCode())
@@ -101,7 +102,7 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
         }
 
         @Override
-        public Address entityToDomain(kr.hs.dgsw.cns.aggregate.applicant.entity.value.Address entity) {
+        public Address entityToDomain(AddressVO entity) {
             return Address.builder()
                     .detailAddress(entity.getDetailAddress())
                     .streetAddress(entity.getStreetAddress())
@@ -110,10 +111,10 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
         }
     }
 
-    static class ParentMapper implements Mapper<ParentInfo, Parent> {
+    static class ParentMapper implements Mapper<ParentInfo, ParentVO> {
         @Override
-        public Parent domainToEntity(ParentInfo domain) {
-            return Parent.builder()
+        public ParentVO domainToEntity(ParentInfo domain) {
+            return ParentVO.builder()
                     .birth(domain.getBirth())
                     .phone(domain.getPhone())
                     .name(domain.getName())
@@ -122,7 +123,7 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
         }
 
         @Override
-        public ParentInfo entityToDomain(Parent entity) {
+        public ParentInfo entityToDomain(ParentVO entity) {
             return ParentInfo.builder()
                     .birth(entity.getBirth())
                     .phone(entity.getPhone())
@@ -132,46 +133,44 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
         }
     }
 
-    static class ScoreMapper implements Mapper<Score, kr.hs.dgsw.cns.aggregate.applicant.entity.Score> {
+    static class ScoreMapper implements Mapper<Score, AbstractScore> {
 
         @Override
-        public kr.hs.dgsw.cns.aggregate.applicant.entity.Score domainToEntity(Score domain) {
+        public AbstractScore domainToEntity(Score domain) {
             if (domain instanceof GedScore) {
-                return new QualificationScore(domain.getId(), (((GedScore) domain).getGedScores())
-                        .stream().map(gedGrade -> new GedGrade(gedGrade.getSubject(), gedGrade.getPoint()))
+                return new QualificationScoreEntity(domain.getId(), (((GedScore) domain).getGedScores())
+                        .stream().map(gedGrade -> new GedGradeVO(gedGrade.getSubject(), gedGrade.getPoint()))
                         .collect(Collectors.toList()));
             }
 
-            kr.hs.dgsw.cns.aggregate.applicant.domain.SchoolScore score
-                    = (kr.hs.dgsw.cns.aggregate.applicant.domain.SchoolScore) domain;
+            SchoolScore score = (SchoolScore) domain;
 
-            List<SchoolGrade> schoolGrades = score.getSchoolGrades().stream()
-                    .map(schoolGrade -> new SchoolGrade(schoolGrade.getGrade(),
+            List<SchoolGradeVO> schoolGradeVOS = score.getSchoolGrades().stream()
+                    .map(schoolGrade -> new SchoolGradeVO(schoolGrade.getGrade(),
                             schoolGrade.getSemester(), schoolGrade.getSubject(), schoolGrade.isDoubled(),
                             schoolGrade.getPoint())).toList();
-            List<Attendance> attendances = score.getAttendancePoints().stream()
-                    .map(ap -> new Attendance(ap.getGrade(), ap.getSemester(), ap.getAbsence(),
+            List<AttendanceVO> attendanceVOS = score.getAttendancePoints().stream()
+                    .map(ap -> new AttendanceVO(ap.getGrade(), ap.getSemester(), ap.getAbsence(),
                             ap.getTardiness(), ap.getEarlyLeave(), ap.getSkipped())).toList();
-            List<Volunteer> volunteers = score.getVolunteerPoints().stream()
-                    .map(vp -> new Volunteer(vp.getGrade(), vp.getPoint()))
+            List<VolunteerVO> volunteerVOS = score.getVolunteerPoints().stream()
+                    .map(vp -> new VolunteerVO(vp.getGrade(), vp.getPoint()))
                     .toList();
 
-            return new SchoolScore(domain.getId(), schoolGrades, attendances, volunteers,
+            return new SchoolScoreEntity(domain.getId(), schoolGradeVOS, attendanceVOS, volunteerVOS,
                     score.getPrize());
         }
 
         @Override
-        public Score entityToDomain(kr.hs.dgsw.cns.aggregate.applicant.entity.Score entity) {
-            if (entity instanceof QualificationScore score) {
+        public Score entityToDomain(AbstractScore entity) {
+            if (entity instanceof QualificationScoreEntity score) {
                 return new GedScore(score.getId(), score.getGedGrades().stream()
-                        .map(gg -> new kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade
-                                .GedGrade(gg.getSubject(), gg.getPoint())).toList());
+                        .map(gg -> new GedGrade(gg.getSubject(), gg.getPoint())).toList());
             }
 
-            SchoolScore score = (SchoolScore) entity;
-            List<kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.SchoolGrade> schoolGrades
+            SchoolScoreEntity score = (SchoolScoreEntity) entity;
+            List<SchoolGrade> schoolGrades
                     = score.getSchoolGrades().stream().map(sg ->
-                    new kr.hs.dgsw.cns.aggregate.applicant.domain.value.grade.SchoolGrade(
+                    new SchoolGrade(
                             sg.getGrade(), sg.getSemester(), sg.getSubject(), sg.isDoubled(), sg.getPoint()
                     )).toList();
             List<AttendancePoint> attendancePoints = score.getAttendances().stream()
@@ -181,10 +180,9 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
             List<VolunteerPoint> volunteerPoints = score.getVolunteers().stream()
                     .map(v -> new VolunteerPoint(v.getGrade(), v.getPoint()))
                     .toList();
-            return new kr.hs.dgsw.cns.aggregate.applicant.domain.SchoolScore(
+            return new SchoolScore(
                     entity.getId(), schoolGrades, attendancePoints, volunteerPoints, score.getPrize()
             );
         }
     }
-
 }

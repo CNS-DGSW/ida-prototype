@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Access(AccessType.FIELD)
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class Score {
+public abstract class AbstractScore {
 
     @Id @GeneratedValue
     @Column(name = "score_id")

@@ -12,7 +12,7 @@ import java.io.Serializable;
 @ToString
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Address implements Serializable {
+public class AddressVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 6069439922948968201L;
 

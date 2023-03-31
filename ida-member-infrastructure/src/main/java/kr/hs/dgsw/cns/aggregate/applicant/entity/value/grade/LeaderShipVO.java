@@ -1,9 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.applicant.entity.value.grade;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Grade;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Semester;
 import lombok.AccessLevel;
@@ -17,10 +14,9 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Attendance implements Serializable {
-
+public class LeaderShipVO implements Serializable {
     @Serial
-    private static final long serialVersionUID = 4255732487670626813L;
+    private static final long serialVersionUID = -1898856673170033661L;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -30,13 +26,6 @@ public class Attendance implements Serializable {
     @Enumerated(EnumType.STRING)
     private Semester semester;
 
-    private short absence;
-
-    private short tardiness;
-
-    @Column(name = "early_leave")
-    private short earlyLeave;
-
-    private short skipped;
+    private boolean check;
 
 }

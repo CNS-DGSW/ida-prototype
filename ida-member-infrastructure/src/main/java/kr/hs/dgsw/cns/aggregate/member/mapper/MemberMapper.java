@@ -17,7 +17,6 @@ public class MemberMapper implements Mapper<Member, MemberEntity> {
         return MemberEntity.builder()
                 .id(idMapper.domainToEntity(domain.getId()))
                 .email(domain.getEmail())
-                .name(domain.getName())
                 .password(domain.getPassword())
                 .role(domain.getRole())
                 .build();
@@ -28,7 +27,6 @@ public class MemberMapper implements Mapper<Member, MemberEntity> {
         return Member.builder()
                 .id(idMapper.entityToDomain(entity.getId()))
                 .email(entity.getEmail())
-                .name(entity.getName())
                 .password(entity.getPassword())
                 .role(entity.getRole())
                 .build();

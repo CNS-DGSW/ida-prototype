@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @ToString
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Parent implements Serializable {
+public class ParentVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 8043145527594742966L;
 
