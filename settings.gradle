@@ -6,4 +6,6 @@ include 'ida-http-application'
 include 'ida-domain-common'
 include 'ida-infrastructure-common'
 include 'ida-applicant-domain'
+include 'ida-admission-domain'
+include 'ida-admission-infrastructure'
 

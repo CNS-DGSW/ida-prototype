@@ -9,15 +9,18 @@
         </processorPath>
         <module name="IdaPrototype.ida-applicant-domain.test" />
         <module name="IdaPrototype.ida-member-infrastructure.test" />
+        <module name="IdaPrototype.ida-admission-domain.test" />
+        <module name="IdaPrototype.ida-applicant-domain.main" />
+        <module name="IdaPrototype.ida-common.test" />
+        <module name="IdaPrototype.ida-http-application.test" />
         <module name="IdaPrototype.ida-common.main" />
         <module name="IdaPrototype.ida-domain-common.test" />
         <module name="IdaPrototype.ida-member-domain.test" />
-        <module name="IdaPrototype.ida-applicant-domain.main" />
+        <module name="IdaPrototype.ida-admission-domain.main" />
+        <module name="IdaPrototype.ida-admission-infrastructure.test" />
         <module name="IdaPrototype.ida-member-domain.main" />
         <module name="IdaPrototype.ida-infrastructure-common.test" />
-        <module name="IdaPrototype.ida-common.test" />
         <module name="IdaPrototype.ida-domain-common.main" />
-        <module name="IdaPrototype.ida-http-application.test" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -35,6 +38,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt/ecj/3.26.0/4837be609a3368a0f7e7cf0dc1bdbc7fe94993de/ecj-3.26.0.jar" />
         </processorPath>
         <module name="IdaPrototype.ida-member-infrastructure.main" />
+        <module name="IdaPrototype.ida-admission-infrastructure.main" />
         <module name="IdaPrototype.ida-infrastructure-common.main" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
