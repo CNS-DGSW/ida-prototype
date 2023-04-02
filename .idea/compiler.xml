@@ -11,6 +11,7 @@
         <module name="IdaPrototype.ida-member-infrastructure.test" />
         <module name="IdaPrototype.ida-admission-domain.test" />
         <module name="IdaPrototype.ida-applicant-domain.main" />
+        <module name="IdaPrototype.ida-jwt-infrastructure.test" />
         <module name="IdaPrototype.ida-common.test" />
         <module name="IdaPrototype.ida-http-application.test" />
         <module name="IdaPrototype.ida-common.main" />
@@ -18,6 +19,7 @@
         <module name="IdaPrototype.ida-member-domain.test" />
         <module name="IdaPrototype.ida-admission-domain.main" />
         <module name="IdaPrototype.ida-admission-infrastructure.test" />
+        <module name="IdaPrototype.ida-jwt-infrastructure.main" />
         <module name="IdaPrototype.ida-member-domain.main" />
         <module name="IdaPrototype.ida-infrastructure-common.test" />
         <module name="IdaPrototype.ida-domain-common.main" />

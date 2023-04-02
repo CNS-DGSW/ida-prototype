@@ -17,4 +17,15 @@ spring:
     database: mysql
     generate-ddl: true
 
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          DEBUG
+
+jwt:
+  secret: erinf2ioheofj092t9ut2h4iurg8qx3euih3ikfbikwe89hej
+  refresh: igoowrobjsbvopqegIH3R2NFWEFNVIWNCILJ89GHFUBUIIFC
+  expire-millis: 36000000
 

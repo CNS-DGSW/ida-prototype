@@ -29,4 +29,8 @@ public class Password {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public static Password of(String value) {
+        return new Password(value);
+    }
 }

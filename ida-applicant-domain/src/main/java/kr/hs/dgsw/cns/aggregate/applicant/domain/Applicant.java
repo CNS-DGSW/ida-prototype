@@ -15,4 +15,8 @@ public class Applicant {
 
     private Privacy privacy;
 
+    public void updatePrivacy(Privacy privacy) {
+        this.privacy = privacy;
+    }
+
 }

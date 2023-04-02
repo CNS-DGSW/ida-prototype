@@ -12,15 +12,23 @@ repositories {
 }
 
 dependencies {
-    implementation project(':ida-applicant-domain')
+    implementation 'org.reflections:reflections:0.10.2'
+
     implementation project(':ida-common')
     implementation project(':ida-domain-common')
     implementation project(':ida-infrastructure-common')
+
     implementation project(':ida-member-domain')
     implementation project(':ida-member-infrastructure')
+    implementation project(':ida-applicant-domain')
+    implementation project(':ida-admission-domain')
+    implementation project(':ida-admission-infrastructure')
+
+    implementation project(':ida-jwt-infrastructure')
 
     runtimeOnly mysql
     implementation springboot_web
+    implementation jjwt
     annotationProcessor springboot_anno
 
     testImplementation springboot_test

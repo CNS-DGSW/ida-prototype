@@ -1,7 +1,9 @@
 package kr.hs.dgsw.cns.domain.spi;
 
+import java.util.Optional;
+
 public interface QuerySpi<T, ID> {
 
-    T findById(ID id);
+    Optional<T> findById(ID id);
 
 }

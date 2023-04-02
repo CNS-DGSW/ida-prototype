@@ -10,7 +10,7 @@ import kr.hs.dgsw.cns.aggregate.member.entity.MemberEntity;
 import kr.hs.dgsw.cns.aggregate.member.mapper.MemberIdMapper;
 import kr.hs.dgsw.cns.aggregate.member.mapper.MemberMapper;
 import kr.hs.dgsw.cns.aggregate.member.spi.service.MemberRegisterService;
-import kr.hs.dgsw.cns.aggregate.member.dto.MemberRegisterRequest;
+import kr.hs.dgsw.cns.aggregate.member.dto.MemberRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
     private final ApplicantCommandRepository applicantCommandRepository;
 
     @Override
-    public void register(MemberRegisterRequest registerRequest) {
+    public void register(MemberRequest registerRequest) {
         MemberEntity member = memberMapper.domainToEntity(
                 Member.builder()
                         .email(registerRequest.getEmail())

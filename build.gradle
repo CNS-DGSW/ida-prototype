@@ -9,7 +9,7 @@ buildscript {
         springboot_version = '3.0.4'
 
         springboot_anno = 'org.springframework.boot:spring-boot-configuration-processor'
-        springboot_web = ['org.springframework.boot:spring-boot-starter-web'] // , 'org.springframework.boot:spring-boot-starter-security'
+        springboot_web = ['org.springframework.boot:spring-boot-starter-web', 'org.springframework.boot:spring-boot-starter-security']
         springboot_validation = 'org.springframework.boot:spring-boot-starter-validation'
         springboot_jpa = 'org.springframework.boot:spring-boot-starter-data-jpa'
         springboot_querydsl_impl = 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -19,6 +19,7 @@ buildscript {
         springboot_mockito = ['org.mockito:mockito-junit-jupiter:3.11.2', 'org.mockito:mockito-core:3.11.2']
 
         mysql = 'com.mysql:mysql-connector-j:8.0.32'
+        jjwt = ['io.jsonwebtoken:jjwt-api:0.11.5', 'io.jsonwebtoken:jjwt-impl:0.11.5', 'io.jsonwebtoken:jjwt-jackson:0.11.5']
     }
 }
 
