@@ -11,7 +11,7 @@ import kr.hs.dgsw.cns.aggregate.applicant.entity.value.PersonalInformation;
 import kr.hs.dgsw.cns.domain.MemberId;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.SchoolCode;
 import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
-import kr.hs.dgsw.cns.global.embedd.SchoolCodeVO;
+import kr.hs.dgsw.cns.aggregate.applicant.entity.value.SchoolCodeVO;
 import kr.hs.dgsw.cns.global.mapper.Mapper;
 import kr.hs.dgsw.cns.global.util.MapperUtils;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.global.embedd;
+package kr.hs.dgsw.cns.aggregate.applicant.entity.value;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -11,7 +11,7 @@ import java.util.Objects;
 @Getter
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Merit implements Serializable {
+public class MeritVO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -5819639942548152697L;
@@ -23,7 +23,7 @@ public class Merit implements Serializable {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Merit school = (Merit) obj;
+        MeritVO school = (MeritVO) obj;
         return Objects.equals(code, school.code);
     }
 
@@ -32,7 +32,7 @@ public class Merit implements Serializable {
         return Objects.hash(code);
     }
 
-    public static Merit of(String code) {
-        return new Merit(code);
+    public static MeritVO of(String code) {
+        return new MeritVO(code);
     }
 }

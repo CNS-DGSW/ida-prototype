@@ -11,6 +11,10 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * 회원 엔티티 클래스를 다른 애그리거트에서도 연관관계 매핑을 하기 위해
+ * 지원하는 회원 임베디드 아이디 클래스
+ */
 @Getter
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)

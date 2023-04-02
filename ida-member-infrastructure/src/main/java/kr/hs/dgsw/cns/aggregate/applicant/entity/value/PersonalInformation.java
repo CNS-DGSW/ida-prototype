@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Gender;
 import kr.hs.dgsw.cns.aggregate.converter.PhoneNumberConverter;
 import kr.hs.dgsw.cns.domain.value.PhoneNumber;
-import kr.hs.dgsw.cns.global.embedd.Merit;
-import kr.hs.dgsw.cns.global.embedd.SchoolCodeVO;
 import lombok.*;
 
 import java.io.Serial;
@@ -41,6 +39,6 @@ public class PersonalInformation implements Serializable {
     private ParentVO parent;
 
     @Embedded
-    private Merit merit;
+    private MeritVO merit;
 
 }

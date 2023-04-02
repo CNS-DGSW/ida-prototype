@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.global.embedd;
+package kr.hs.dgsw.cns.aggregate.applicant.entity.value;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
