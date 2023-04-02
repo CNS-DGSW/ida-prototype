@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.domain;
+package kr.hs.dgsw.cns.aggregate.applicant.domain.value;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

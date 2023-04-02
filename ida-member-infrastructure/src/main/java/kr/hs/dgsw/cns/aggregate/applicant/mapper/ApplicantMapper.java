@@ -9,7 +9,7 @@ import kr.hs.dgsw.cns.aggregate.applicant.entity.value.AddressVO;
 import kr.hs.dgsw.cns.aggregate.applicant.entity.value.ParentVO;
 import kr.hs.dgsw.cns.aggregate.applicant.entity.value.PersonalInformation;
 import kr.hs.dgsw.cns.domain.MemberId;
-import kr.hs.dgsw.cns.domain.SchoolCode;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.SchoolCode;
 import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
 import kr.hs.dgsw.cns.global.embedd.SchoolCodeVO;
 import kr.hs.dgsw.cns.global.mapper.Mapper;

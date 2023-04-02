@@ -1,8 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.applicant.domain.value;
 
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Gender;
-import kr.hs.dgsw.cns.domain.Merit;
-import kr.hs.dgsw.cns.domain.SchoolCode;
 import kr.hs.dgsw.cns.domain.value.PhoneNumber;
 import lombok.*;
 
