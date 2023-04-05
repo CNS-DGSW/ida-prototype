@@ -1,8 +1,8 @@
 package kr.hs.dgsw.cns.aggregate.applicant.usecase;
 
 import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
-import kr.hs.dgsw.cns.aggregate.applicant.dto.InformationResponse;
-import kr.hs.dgsw.cns.aggregate.applicant.dto.UpdateInformationRequest;
+import kr.hs.dgsw.cns.aggregate.applicant.dto.info.InformationResponse;
+import kr.hs.dgsw.cns.aggregate.applicant.dto.info.UpdateInformationRequest;
 import kr.hs.dgsw.cns.aggregate.applicant.spi.query.CommandApplicantSpi;
 import kr.hs.dgsw.cns.aggregate.applicant.spi.query.QueryApplicantSpi;
 import kr.hs.dgsw.cns.domain.MemberId;
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @UseCase
 @RequiredArgsConstructor
-public class InformationUseCase {
+public class ApplicantInfoUseCase {
 
     private final QueryApplicantSpi queryApplicantSpi;
     private final CommandApplicantSpi commandApplicantSpi;

@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.aggregate.applicant.dto;
+package kr.hs.dgsw.cns.aggregate.applicant.dto.info;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Privacy;
