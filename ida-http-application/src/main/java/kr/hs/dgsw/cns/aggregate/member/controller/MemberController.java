@@ -1,6 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.member.controller;
 
-import kr.hs.dgsw.cns.aggregate.member.MemberWebAdapter;
+import kr.hs.dgsw.cns.aggregate.member.webadapter.MemberWebAdapter;
 import kr.hs.dgsw.cns.aggregate.member.dto.MemberRequest;
 import kr.hs.dgsw.cns.aggregate.member.ro.TokenRO;
 import lombok.RequiredArgsConstructor;

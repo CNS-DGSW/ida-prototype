@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor @NoArgsConstructor
-public class UpdateInformationDto {
+public class UpdateInformationRequest {
 
     private String name;
 
@@ -30,12 +30,5 @@ public class UpdateInformationDto {
                 .gender(gender)
                 .phone(PhoneNumber.of(telephone))
                 .build();
-    }
-
-    public UpdateInformationDto(Privacy privacy) {
-        this.name = privacy.getName();
-        this.birth = privacy.getBirth();
-        this.gender = privacy.getGender();
-        this.telephone = privacy.getPhone().getNumber();
     }
 }

@@ -4,6 +4,6 @@ import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
 
 public interface CommandApplicantSpi {
 
-    <S extends Applicant> S save(S entity);
+    Applicant save(Applicant domain);
 
 }

@@ -4,7 +4,6 @@ import kr.hs.dgsw.cns.aggregate.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +29,7 @@ public class AuthDetailService implements UserDetailsService {
     }
 
     private UserDetails toUserDetails(Member member) {
-        return new User(member.getEmail(), member.getPassword().getValue(),
+        return new AuthUser(member.getId(), member.getEmail(),member.getPassword().getValue(),
                 toGrantedAuthorities(member.getRole()));
     }
 

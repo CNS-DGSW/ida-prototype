@@ -1,8 +1,7 @@
 package kr.hs.dgsw.cns.aggregate.member.service;
 
-import kr.hs.dgsw.cns.aggregate.applicant.dao.ApplicantCommandRepository;
+import kr.hs.dgsw.cns.aggregate.applicant.dao.ApplicantRepository;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
-import kr.hs.dgsw.cns.aggregate.applicant.mapper.ApplicantMapper;
 import kr.hs.dgsw.cns.aggregate.member.dao.MemberCommandRepository;
 import kr.hs.dgsw.cns.aggregate.member.domain.Member;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Password;
@@ -22,10 +21,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
     private final MemberMapper memberMapper;
     private final MemberIdMapper idMapper;
-    private final ApplicantMapper applicantMapper;
-
     private final MemberCommandRepository memberCommandRepository;
-    private final ApplicantCommandRepository applicantCommandRepository;
+    private final ApplicantRepository applicantRepository;
 
     @Override
     public void register(MemberRequest registerRequest) {
@@ -40,6 +37,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
                 .build();
 
         memberCommandRepository.save(member);
-        applicantCommandRepository.save(applicantMapper.domainToEntity(applicant));
+        applicantRepository.save(applicant);
     }
 }

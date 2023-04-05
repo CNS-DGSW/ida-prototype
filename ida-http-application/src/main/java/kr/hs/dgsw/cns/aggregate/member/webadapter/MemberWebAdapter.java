@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.aggregate.member;
+package kr.hs.dgsw.cns.aggregate.member.webadapter;
 
 import kr.hs.dgsw.cns.aggregate.member.dto.MemberRequest;
 import kr.hs.dgsw.cns.aggregate.member.ro.TokenRO;

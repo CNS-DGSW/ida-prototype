@@ -31,8 +31,6 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-        SecurityFilterChain chain = http.build();
-        System.out.println(chain);
-        return chain;
+        return http.build();
     }
 }
