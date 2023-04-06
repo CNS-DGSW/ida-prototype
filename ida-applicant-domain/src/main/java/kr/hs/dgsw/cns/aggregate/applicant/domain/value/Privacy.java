@@ -27,11 +27,17 @@ public class Privacy {
 
     private Merit merit;
 
+    private Photo photo;
+
     public void updateParentInfo(ParentInfo parentInfo) {
         this.parentInfo = parentInfo;
     }
 
     public void updateAddress(Address address) {
         this.address = address;
+    }
+
+    public void updateIdPhoto(Photo filename) {
+        this.photo = filename;
     }
 }

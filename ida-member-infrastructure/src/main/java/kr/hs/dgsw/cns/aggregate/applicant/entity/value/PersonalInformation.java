@@ -1,8 +1,10 @@
 package kr.hs.dgsw.cns.aggregate.applicant.entity.value;
 
 import jakarta.persistence.*;
+import kr.hs.dgsw.cns.aggregate.applicant.domain.value.Photo;
 import kr.hs.dgsw.cns.aggregate.applicant.domain.value.constraint.Gender;
 import kr.hs.dgsw.cns.aggregate.converter.PhoneNumberConverter;
+import kr.hs.dgsw.cns.aggregate.converter.PhotoConverter;
 import kr.hs.dgsw.cns.domain.value.PhoneNumber;
 import lombok.*;
 
@@ -28,6 +30,10 @@ public class PersonalInformation implements Serializable {
 
     @Convert(converter = PhoneNumberConverter.class)
     private PhoneNumber phone;
+
+    @Column(name = "id_photo")
+    @Convert(converter = PhotoConverter.class)
+    private Photo idPhoto;
 
     @Embedded
     private SchoolCodeVO school;
