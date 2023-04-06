@@ -12,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    implementation project(':ida-common')
+
     implementation springboot_jpa
     implementation springboot_querydsl_impl
     annotationProcessor springboot_querydsl_anno
