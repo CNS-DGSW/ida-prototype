@@ -35,7 +35,7 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantEntity> {
     public Applicant entityToDomain(ApplicantEntity entity) {
         return Applicant.builder()
                 .id(new MemberId(entity.getEmbeddedMemberId().getId()))
-                .privacy(MapperUtils.convertToDomainIsNull(entity.getInformation(), INFO_MAPPER))
+                .privacy((entity.getInformation() == null) ? new Privacy() : INFO_MAPPER.entityToDomain(entity.getInformation()))
                 .build();
     }
 

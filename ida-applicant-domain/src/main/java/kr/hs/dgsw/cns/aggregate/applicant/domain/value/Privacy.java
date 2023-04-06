@@ -29,6 +29,13 @@ public class Privacy {
 
     private Photo photo;
 
+    public Privacy() {
+        this.name = null;
+        this.birth = null;
+        this.gender = null;
+        this.phone = null;
+    }
+
     public void updateParentInfo(ParentInfo parentInfo) {
         this.parentInfo = parentInfo;
     }

@@ -1,5 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.applicant.controller;
 
+import kr.hs.dgsw.cns.aggregate.applicant.dto.photo.PhotoResponse;
 import kr.hs.dgsw.cns.aggregate.applicant.usecase.ApplicantPhotoUseCase;
 import kr.hs.dgsw.cns.global.auth.AuthUser;
 import kr.hs.dgsw.cns.global.dto.FileRequest;
@@ -48,5 +49,15 @@ public class PhotoController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @GetMapping
+    public String findPhoto(@AuthenticationPrincipal AuthUser authUser) {
+        PhotoResponse response = photoUseCase.findIdPhoto(authUser.getId());
+        if (response.getFilename() != null) {
+            return String.format("<img src='%s'>", response.getFilename());
+        }
+
+        return "";
     }
 }
