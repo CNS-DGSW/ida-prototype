@@ -3,6 +3,7 @@ package kr.hs.dgsw.cns.aggregate.admission.entity.score;
 import jakarta.persistence.*;
 import kr.hs.dgsw.cns.aggregate.admission.converter.PointConverter;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.Point;
+import kr.hs.dgsw.cns.aggregate.admission.entity.score.embedded.EmbeddedScoreId;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.AttendanceVO;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.SchoolGradeVO;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.VolunteerVO;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @DiscriminatorValue("S")
+@Table(name = "school_score")
 public class SchoolScoreEntity extends AbstractScore {
 
     @OrderColumn(name = "school_idx")
@@ -36,7 +38,7 @@ public class SchoolScoreEntity extends AbstractScore {
     @Convert(converter = PointConverter.class)
     private Point prize;
 
-    public SchoolScoreEntity(Long id, List<SchoolGradeVO> schoolGradeVOS, List<AttendanceVO> attendanceVOS,
+    public SchoolScoreEntity(EmbeddedScoreId id, List<SchoolGradeVO> schoolGradeVOS, List<AttendanceVO> attendanceVOS,
                              List<VolunteerVO> volunteerVOS, Point prize) {
         super(id);
         this.schoolGrades = schoolGradeVOS;
@@ -45,7 +47,7 @@ public class SchoolScoreEntity extends AbstractScore {
         this.prize = prize;
     }
 
-    public SchoolScoreEntity(Long id) {
+    public SchoolScoreEntity(EmbeddedScoreId id) {
         super(id);
     }
 

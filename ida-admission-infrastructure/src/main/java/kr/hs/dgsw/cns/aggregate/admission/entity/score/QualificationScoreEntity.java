@@ -1,6 +1,7 @@
 package kr.hs.dgsw.cns.aggregate.admission.entity.score;
 
 import jakarta.persistence.*;
+import kr.hs.dgsw.cns.aggregate.admission.entity.score.embedded.EmbeddedScoreId;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.GedGradeVO;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @DiscriminatorValue("Q")
+@Table(name = "qualification_score")
 public class QualificationScoreEntity extends AbstractScore {
 
     @OrderColumn(name = "ged_idx")
@@ -20,12 +22,12 @@ public class QualificationScoreEntity extends AbstractScore {
     @CollectionTable(name = "ged_grade", joinColumns = @JoinColumn(name = "score_id"))
     private List<GedGradeVO> gedGrades;
 
-    public QualificationScoreEntity(Long id, List<GedGradeVO> gedGrades) {
+    public QualificationScoreEntity(EmbeddedScoreId id, List<GedGradeVO> gedGrades) {
         super(id);
         this.gedGrades = gedGrades;
     }
 
-    public QualificationScoreEntity(Long id) {
+    public QualificationScoreEntity(EmbeddedScoreId id) {
         super(id);
         this.gedGrades = new LinkedList<>();
     }

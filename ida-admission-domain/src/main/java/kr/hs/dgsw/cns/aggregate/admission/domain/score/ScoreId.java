@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public abstract class Score {
-
-    private final ScoreId id;
-
+public class ScoreId {
+    
+    private final Long id;
+    
 }

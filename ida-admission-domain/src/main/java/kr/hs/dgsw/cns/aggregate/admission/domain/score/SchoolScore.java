@@ -20,7 +20,7 @@ public class SchoolScore extends Score {
 
     private final Point prize;
 
-    public SchoolScore(Long id) {
+    public SchoolScore(ScoreId id) {
         super(id);
         this.schoolGrades = new LinkedList<>();
         this.attendancePoints = new LinkedList<>();
@@ -28,7 +28,7 @@ public class SchoolScore extends Score {
         this.prize = Point.of((short) 0);
     }
 
-    public SchoolScore(Long id, List<SchoolGrade> schoolGrades,
+    public SchoolScore(ScoreId id, List<SchoolGrade> schoolGrades,
                        List<AttendancePoint> attendancePoints, List<VolunteerPoint> volunteerPoints,
                        Point prize) {
         super(id);
