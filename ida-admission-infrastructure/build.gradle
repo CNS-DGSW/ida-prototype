@@ -16,6 +16,7 @@ dependencies {
     implementation project(':ida-domain-common')
     implementation project(':ida-infrastructure-common')
     implementation project(':ida-admission-domain')
+    implementation project(':ida-member-infrastructure')    // for applicant mapping
 
     runtimeOnly mysql
     implementation springboot_jpa

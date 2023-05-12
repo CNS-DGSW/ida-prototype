@@ -55,6 +55,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+generated/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -144,6 +145,7 @@ replay_pid*
 .gradle
 **/build/
 !src/**/build/
+!src/**/generated/
 
 # Ignore Gradle GUI config
 gradle-app.setting
