@@ -34,4 +34,5 @@ public class AdmissionEntity {
     @JoinColumn(name = "score_id")
     private AbstractScore score;
 
+
 }

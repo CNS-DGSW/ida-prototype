@@ -4,7 +4,7 @@ import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.AdmissionApplic
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.AdmissionStatus;
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.Document;
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.constraint.Progress;
-import kr.hs.dgsw.cns.aggregate.admission.domain.score.ScoreId;
+import kr.hs.dgsw.cns.aggregate.admission.domain.score.Score;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +24,6 @@ public class Admission {
 
     private Progress progress;
 
-    private ScoreId scoreId;
+    private Score score;
 
 }
