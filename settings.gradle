@@ -9,4 +9,5 @@ include 'ida-applicant-domain'
 include 'ida-admission-domain'
 include 'ida-admission-infrastructure'
 include 'ida-jwt-infrastructure'
-
+include 'ida-secondary-domain'
+include 'ida-secondary-infrastructure'

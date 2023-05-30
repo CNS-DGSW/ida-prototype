@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version "$springboot_version"
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group 'kr.hs.dgsw.cns'
+version '1.0-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation project(':ida-common')
+	implementation project(':ida-domain-common')
+	implementation project(':ida-infrastructure-common')
+	implementation project(':ida-secondary-domain')
+
+	runtimeOnly mysql
+	implementation springboot_jpa
+	implementation springboot_querydsl_impl
+	annotationProcessor springboot_querydsl_anno
+
+	testImplementation springboot_test
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+	useJUnitPlatform()
+}
