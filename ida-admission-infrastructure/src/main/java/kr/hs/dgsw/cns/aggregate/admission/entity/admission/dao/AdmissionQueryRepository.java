@@ -19,10 +19,10 @@ public class AdmissionQueryRepository implements QueryAdmissionSpi {
     private final AdmissionMapper mapper;
 
     @Override
-    public Optional<Admission> findById(Long id) {
+    public Optional<Admission> findByMemberId(Long memberId) {
         QAdmissionEntity admissionEntity = QAdmissionEntity.admissionEntity;
         AdmissionEntity entity = queryFactory.selectFrom(admissionEntity)
-                .where(admissionEntity.id.eq(id))
+                .where(admissionEntity.applicant.applicantId.id.eq(memberId))
                 .fetchOne();
         if (entity == null) {
             return Optional.empty();
