@@ -29,6 +29,7 @@ public class AdmissionMapper implements Mapper<Admission, AdmissionEntity> {
     @Override
     public AdmissionEntity domainToEntity(Admission domain) {
         return AdmissionEntity.builder()
+                .id((domain.getId() == null) ? null : domain.getId())
                 .applicant(MapperUtils.convertToEntityIsNull(domain.getApplicant(), APPLICANT_MAPPER))
                 .document(MapperUtils.convertToEntityIsNull(domain.getDocument(), DOCUMENT_MAPPER))
                 .admissionStatus(MapperUtils.convertToEntityIsNull(domain.getStatus(), STATUS_MAPPER))
@@ -40,6 +41,7 @@ public class AdmissionMapper implements Mapper<Admission, AdmissionEntity> {
     @Override
     public Admission entityToDomain(AdmissionEntity entity) {
         return Admission.builder()
+                .id((entity.getId() == null) ? null : entity.getId())
                 .applicant(MapperUtils.convertToDomainIsNull(entity.getApplicant(), APPLICANT_MAPPER))
                 .document(MapperUtils.convertToDomainIsNull(entity.getDocument(), DOCUMENT_MAPPER))
                 .status(MapperUtils.convertToDomainIsNull(entity.getAdmissionStatus(), STATUS_MAPPER))
