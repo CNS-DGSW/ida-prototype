@@ -19,6 +19,8 @@ public class SchoolScoreServiceImpl implements SchoolScoreService {
 
     private final ConvertGradeRecord gradeRecord;
 
+    // TODO: I need to migration ScoreServiceImpl
+
     @Override
     public double calculateScore(List<SchoolGrade> scores, List<AttendancePoint> attendancePoints, boolean isGraduated) {
         AtomicReference<Double> gradeScore = new AtomicReference<>(0.0);
