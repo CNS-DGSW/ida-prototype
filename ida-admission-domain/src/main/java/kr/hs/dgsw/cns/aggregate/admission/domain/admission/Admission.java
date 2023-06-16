@@ -35,6 +35,10 @@ public class Admission {
         this.document = document;
     }
 
+    public void updateType(AdmissionApplicant applicant) {
+        this.applicant = applicant;
+    }
+
     public void updateStatus(AdmissionStatus status) {
         this.status = status;
     }
