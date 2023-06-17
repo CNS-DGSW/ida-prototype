@@ -11,6 +11,7 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+        metadata_builder_contributor: kr.hs.dgsw.cns.global.config.datasource.CustomSQLFunctionContributor
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect

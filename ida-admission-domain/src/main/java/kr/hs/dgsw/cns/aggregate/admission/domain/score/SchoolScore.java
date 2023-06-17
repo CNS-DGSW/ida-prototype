@@ -12,13 +12,29 @@ import java.util.List;
 @Getter
 public class SchoolScore extends Score {
 
-    private final List<SchoolGrade> schoolGrades;
+    private List<SchoolGrade> schoolGrades;
 
-    private final List<AttendancePoint> attendancePoints;
+    private List<AttendancePoint> attendancePoints;
 
-    private final List<VolunteerPoint> volunteerPoints;
+    private List<VolunteerPoint> volunteerPoints;
 
-    private final Point prize;
+    private Point prize;
+
+    public void setSchoolGrades(List<SchoolGrade> schoolGrades) {
+        this.schoolGrades = schoolGrades;
+    }
+
+    public void setAttendancePoints(List<AttendancePoint> attendancePoints) {
+        this.attendancePoints = attendancePoints;
+    }
+
+    public void setVolunteerPoints(List<VolunteerPoint> volunteerPoints) {
+        this.volunteerPoints = volunteerPoints;
+    }
+
+    public void setPrize(Point prize) {
+        this.prize = prize;
+    }
 
     public SchoolScore(ScoreId id) {
         super(id);

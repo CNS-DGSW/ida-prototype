@@ -51,7 +51,7 @@ public class SchoolScoreMapper implements Mapper<SchoolScore, SchoolScoreEntity>
             return domain.stream().map(schoolGrade -> new SchoolGradeVO(
                     schoolGrade.getGrade(), schoolGrade.getSemester(),
                     schoolGrade.getSubject(), schoolGrade.isDoubled(),
-                    schoolGrade.getPoint()
+                    schoolGrade.getAchieveLevel()
             )).collect(Collectors.toList());
         }
 

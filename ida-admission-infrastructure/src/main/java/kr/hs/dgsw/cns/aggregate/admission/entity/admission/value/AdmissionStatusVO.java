@@ -18,14 +18,14 @@ public class AdmissionStatusVO implements Serializable {
     @Serial
     private static final long serialVersionUID = 5234503036341603917L;
 
-    private boolean submission;
+    private Boolean submission;
 
-    private boolean mailArrival;
+    private Boolean mailArrival;
 
-    private boolean review;
+    private Boolean review;
 
     private LocalDateTime submissionTime;
 
-    private boolean confirmation;
+    private Boolean confirmation;
 
 }

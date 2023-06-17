@@ -28,6 +28,7 @@ dependencies {
 
     runtimeOnly mysql
     implementation springboot_web
+    implementation springboot_jpa
     implementation jjwt
     annotationProcessor springboot_anno
 

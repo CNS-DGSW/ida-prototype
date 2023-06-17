@@ -4,6 +4,7 @@ import kr.hs.dgsw.cns.aggregate.admission.domain.admission.Admission;
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.AdmissionApplicant;
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.AdmissionStatus;
 import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.Document;
+import kr.hs.dgsw.cns.aggregate.admission.domain.admission.value.constraint.Progress;
 import kr.hs.dgsw.cns.aggregate.admission.entity.admission.AdmissionEntity;
 import kr.hs.dgsw.cns.aggregate.admission.entity.admission.value.AdmissionApplicantVO;
 import kr.hs.dgsw.cns.aggregate.admission.entity.admission.value.AdmissionStatusVO;
@@ -12,6 +13,7 @@ import kr.hs.dgsw.cns.aggregate.admission.entity.score.mapper.ScoreMapper;
 import kr.hs.dgsw.cns.domain.MemberId;
 import kr.hs.dgsw.cns.global.embedd.EmbeddedMemberId;
 import kr.hs.dgsw.cns.global.mapper.Mapper;
+import kr.hs.dgsw.cns.global.util.MapperUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,22 +29,24 @@ public class AdmissionMapper implements Mapper<Admission, AdmissionEntity> {
     @Override
     public AdmissionEntity domainToEntity(Admission domain) {
         return AdmissionEntity.builder()
-                .applicant(APPLICANT_MAPPER.domainToEntity(domain.getApplicant()))
-                .document(DOCUMENT_MAPPER.domainToEntity(domain.getDocument()))
-                .admissionStatus(STATUS_MAPPER.domainToEntity(domain.getStatus()))
-                .progress(domain.getProgress())
-                .score(scoreMapper.domainToEntity(domain.getScore()))
+                .id((domain.getId() == null) ? null : domain.getId())
+                .applicant(MapperUtils.convertToEntityIsNull(domain.getApplicant(), APPLICANT_MAPPER))
+                .document(MapperUtils.convertToEntityIsNull(domain.getDocument(), DOCUMENT_MAPPER))
+                .admissionStatus(MapperUtils.convertToEntityIsNull(domain.getStatus(), STATUS_MAPPER))
+                .progress((domain.getProgress() == null) ? Progress.APPLY : domain.getProgress())
+                .score(MapperUtils.convertToEntityIsNull(domain.getScore(), scoreMapper))
                 .build();
     }
 
     @Override
     public Admission entityToDomain(AdmissionEntity entity) {
         return Admission.builder()
-                .applicant(APPLICANT_MAPPER.entityToDomain(entity.getApplicant()))
-                .document(DOCUMENT_MAPPER.entityToDomain(entity.getDocument()))
-                .status(STATUS_MAPPER.entityToDomain(entity.getAdmissionStatus()))
-                .progress(entity.getProgress())
-                .score(scoreMapper.entityToDomain(entity.getScore()))
+                .id((entity.getId() == null) ? null : entity.getId())
+                .applicant(MapperUtils.convertToDomainIsNull(entity.getApplicant(), APPLICANT_MAPPER))
+                .document(MapperUtils.convertToDomainIsNull(entity.getDocument(), DOCUMENT_MAPPER))
+                .status(MapperUtils.convertToDomainIsNull(entity.getAdmissionStatus(), STATUS_MAPPER))
+                .progress((entity.getProgress() == null) ? Progress.APPLY : entity.getProgress())
+                .score(MapperUtils.convertToDomainIsNull(entity.getScore(), scoreMapper))
                 .build();
     }
 
@@ -97,11 +101,11 @@ public class AdmissionMapper implements Mapper<Admission, AdmissionEntity> {
         @Override
         public AdmissionStatus entityToDomain(AdmissionStatusVO entity) {
             return AdmissionStatus.builder()
-                    .submission(entity.isSubmission())
-                    .mailArrival(entity.isMailArrival())
-                    .review(entity.isReview())
+                    .submission(entity.getSubmission())
+                    .mailArrival(entity.getMailArrival())
+                    .review(entity.getReview())
                     .submissionTime(entity.getSubmissionTime())
-                    .confirmation(entity.isConfirmation())
+                    .confirmation(entity.getConfirmation())
                     .build();
         }
     }
