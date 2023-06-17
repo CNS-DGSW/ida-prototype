@@ -22,6 +22,7 @@ public class SchoolScoreServiceImpl implements SchoolScoreService {
     // TODO: I need to migration ScoreServiceImpl
 
     @Override
+    // calcGradeScore
     public double calculateScore(List<SchoolGrade> scores, List<AttendancePoint> attendancePoints, boolean isGraduated) {
         AtomicReference<Double> gradeScore = new AtomicReference<>(0.0);
         double[] subjectScoreSum = new double[6];
