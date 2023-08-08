@@ -15,6 +15,8 @@ dependencies {
 	implementation project(':ida-common')
 	implementation project(':ida-domain-common')
 	implementation project(':ida-infrastructure-common')
+	implementation project(':ida-admission-domain')
+	implementation project(':ida-admission-infrastructure')
 	implementation project(':ida-secondary-domain')
 
 	runtimeOnly mysql

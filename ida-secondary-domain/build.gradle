@@ -10,9 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':ida-common')
-    implementation project(':ida-domain-common')
-    implementation project(':ida-member-domain')
+    implementation project(":ida-admission-domain")
 
     implementation json
 
