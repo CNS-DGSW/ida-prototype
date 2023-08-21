@@ -58,6 +58,7 @@ public class PhotoController {
             return String.format("<img src='%s'>", response.getFilename());
         }
 
+        // TODO: if there is no photo, how can we handle this?
         return "";
     }
 }

@@ -9,7 +9,11 @@ import java.util.List;
 @Getter
 public class GedScore extends Score {
 
-    private final List<GedGrade> gedScores;
+    private List<GedGrade> gedScores;
+
+    public void setGedScores(List<GedGrade> gedScores) {
+        this.gedScores = gedScores;
+    }
 
     public GedScore(ScoreId id) {
         super(id);
