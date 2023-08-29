@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':ida-common')
+    implementation project(':ida-domain-common')
+    implementation project(':ida-applicant-domain')
     implementation json
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
