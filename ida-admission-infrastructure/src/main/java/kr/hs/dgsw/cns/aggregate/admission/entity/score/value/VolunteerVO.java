@@ -24,6 +24,9 @@ public class VolunteerVO implements Serializable {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    @Column(nullable = false)
+    private short hour;
+
     @Convert(converter = PointConverter.class)
     private Point point;
 

@@ -11,6 +11,8 @@ public class VolunteerPoint {
 
     private Grade grade;
 
+    private short hour;
+
     private Point point;
 
 }
