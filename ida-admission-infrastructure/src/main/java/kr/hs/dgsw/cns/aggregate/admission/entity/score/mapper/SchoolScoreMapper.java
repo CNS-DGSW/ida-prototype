@@ -3,11 +3,13 @@ package kr.hs.dgsw.cns.aggregate.admission.entity.score.mapper;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.SchoolScore;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.ScoreId;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.AttendancePoint;
+import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.LeaderShipPoint;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.SchoolGrade;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.VolunteerPoint;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.SchoolScoreEntity;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.embedded.EmbeddedScoreId;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.AttendanceVO;
+import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.LeaderShipVO;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.SchoolGradeVO;
 import kr.hs.dgsw.cns.aggregate.admission.entity.score.value.VolunteerVO;
 import kr.hs.dgsw.cns.global.mapper.Mapper;
@@ -22,6 +24,7 @@ public class SchoolScoreMapper implements Mapper<SchoolScore, SchoolScoreEntity>
     private static final SchoolGradeMapper GRADE_MAPPER = new SchoolGradeMapper();
     private static final AttendanceMapper ATTENDANCE_MAPPER = new AttendanceMapper();
     private static final VolunteerMapper VOLUNTEER_MAPPER = new VolunteerMapper();
+    private static final LeaderShipMapper LEADER_SHIP_MAPPER = new LeaderShipMapper();
 
     @Override
     public SchoolScoreEntity domainToEntity(SchoolScore domain) {
@@ -30,6 +33,7 @@ public class SchoolScoreMapper implements Mapper<SchoolScore, SchoolScoreEntity>
                 GRADE_MAPPER.domainToEntity(domain.getSchoolGrades()),
                 ATTENDANCE_MAPPER.domainToEntity(domain.getAttendancePoints()),
                 VOLUNTEER_MAPPER.domainToEntity(domain.getVolunteerPoints()),
+                LEADER_SHIP_MAPPER.domainToEntity(domain.getLeaderShipPoints()),
                 domain.getPrize()
         );
     }
@@ -41,6 +45,7 @@ public class SchoolScoreMapper implements Mapper<SchoolScore, SchoolScoreEntity>
                 GRADE_MAPPER.entityToDomain(entity.getSchoolGrades()),
                 ATTENDANCE_MAPPER.entityToDomain(entity.getAttendances()),
                 VOLUNTEER_MAPPER.entityToDomain(entity.getVolunteers()),
+                LEADER_SHIP_MAPPER.entityToDomain(entity.getLeaderShips()),
                 entity.getPrize()
         );
     }
@@ -87,14 +92,31 @@ public class SchoolScoreMapper implements Mapper<SchoolScore, SchoolScoreEntity>
         @Override
         public List<VolunteerVO> domainToEntity(List<VolunteerPoint> domain) {
             return domain.stream().map(volunteerPoint -> new VolunteerVO(
-                    volunteerPoint.getGrade(), volunteerPoint.getPoint()
+                    volunteerPoint.getGrade(), volunteerPoint.getHour(), volunteerPoint.getPoint()
             )).collect(Collectors.toList());
         }
 
         @Override
         public List<VolunteerPoint> entityToDomain(List<VolunteerVO> entity) {
-            return entity.stream().map(vo -> new VolunteerPoint(
-                    vo.getGrade(), vo.getPoint()
+            return entity.stream().map(volunteerVO -> new VolunteerPoint(
+                    volunteerVO.getGrade(), volunteerVO.getHour(), volunteerVO.getPoint()
+            )).collect(Collectors.toList());
+        }
+    }
+
+    static class LeaderShipMapper implements Mapper<List<LeaderShipPoint>, List<LeaderShipVO>> {
+
+        @Override
+        public List<LeaderShipVO> domainToEntity(List<LeaderShipPoint> domain) {
+            return domain.stream().map(leaderShipPoint -> new LeaderShipVO(
+                    leaderShipPoint.getGrade(), leaderShipPoint.getSemester(), leaderShipPoint.isCheck()
+            )).collect(Collectors.toList());
+        }
+
+        @Override
+        public List<LeaderShipPoint> entityToDomain(List<LeaderShipVO> entity) {
+            return entity.stream().map(leaderShipVO -> new LeaderShipPoint(
+                    leaderShipVO.getGrade(), leaderShipVO.getSemester(), leaderShipVO.isCheck()
             )).collect(Collectors.toList());
         }
     }

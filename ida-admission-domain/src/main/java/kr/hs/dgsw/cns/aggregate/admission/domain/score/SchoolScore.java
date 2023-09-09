@@ -2,6 +2,7 @@ package kr.hs.dgsw.cns.aggregate.admission.domain.score;
 
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.Point;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.AttendancePoint;
+import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.LeaderShipPoint;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.SchoolGrade;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.VolunteerPoint;
 import lombok.Getter;
@@ -18,6 +19,8 @@ public class SchoolScore extends Score {
 
     private List<VolunteerPoint> volunteerPoints;
 
+    private List<LeaderShipPoint> leaderShipPoints;
+
     private Point prize;
 
     public void setSchoolGrades(List<SchoolGrade> schoolGrades) {
@@ -32,6 +35,10 @@ public class SchoolScore extends Score {
         this.volunteerPoints = volunteerPoints;
     }
 
+    public void setLeaderShipPoints(List<LeaderShipPoint> leaderShipPoints) {
+        this.leaderShipPoints = leaderShipPoints;
+    }
+
     public void setPrize(Point prize) {
         this.prize = prize;
     }
@@ -41,16 +48,18 @@ public class SchoolScore extends Score {
         this.schoolGrades = new LinkedList<>();
         this.attendancePoints = new LinkedList<>();
         this.volunteerPoints = new LinkedList<>();
+        this.leaderShipPoints = new LinkedList<>();
         this.prize = Point.of((short) 0);
     }
 
     public SchoolScore(ScoreId id, List<SchoolGrade> schoolGrades,
                        List<AttendancePoint> attendancePoints, List<VolunteerPoint> volunteerPoints,
-                       Point prize) {
+                       List<LeaderShipPoint> leaderShipPoints, Point prize) {
         super(id);
         this.schoolGrades = schoolGrades;
         this.attendancePoints = attendancePoints;
         this.volunteerPoints = volunteerPoints;
+        this.leaderShipPoints = leaderShipPoints;
         this.prize = prize;
     }
 }
