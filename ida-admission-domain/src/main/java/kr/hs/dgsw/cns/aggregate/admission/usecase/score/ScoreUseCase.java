@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 검정고시 성적 조회 <br>
  * 검정고시 성적 수정 <br>
+ * 검정고시 성적 조회 <br>
  * 성적 조회 <br>
- * 성적 전체 수정 <br>
  * 성적 수정 <br>
  * 자유 학기제 여부 조회 <br>
  * 자유 학기제 여부 수정 <br>
+ * 성적 전체 수정 <br>
  */
 @UseCase
 @RequiredArgsConstructor
@@ -85,7 +85,7 @@ public class ScoreUseCase {
                 .orElseThrow();
         Score score = admission.getScore();
         if (score == null) {
-            score = new SchoolScore(null, dto.getGrades(), new ArrayList<>(), new ArrayList<>(), null);
+            score = new SchoolScore(null, dto.getGrades(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),null);
         }
         else if (!(score instanceof SchoolScore)) {
             // this admission's score isn't ged
@@ -115,7 +115,7 @@ public class ScoreUseCase {
         Score score = admission.getScore();
         if (score == null) {
             score = new SchoolScore(null, new ArrayList<>(), request.getAttendancePoints(),
-                    new ArrayList<>(), null);
+                    new ArrayList<>(), new ArrayList<>(), null);
         }
         else if (!(score instanceof SchoolScore)) {
             // this admission's score isn't ged
