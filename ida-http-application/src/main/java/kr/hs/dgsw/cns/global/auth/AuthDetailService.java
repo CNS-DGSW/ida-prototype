@@ -29,7 +29,7 @@ public class AuthDetailService implements UserDetailsService {
     }
 
     private UserDetails toUserDetails(Member member) {
-        return new AuthUser(member.getId(), member.getEmail(),member.getPassword().getValue(),
+        return new AuthUser(member.getId(), member.getContact().getNumber(),member.getPassword().getValue(),
                 toGrantedAuthorities(member.getRole()));
     }
 

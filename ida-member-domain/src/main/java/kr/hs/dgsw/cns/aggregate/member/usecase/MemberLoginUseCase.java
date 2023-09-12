@@ -14,7 +14,7 @@ public class MemberLoginUseCase {
     private final QueryMemberSpi queryMemberSpi;
 
     public long login(final MemberRequest memberRequest) {
-        Member member = queryMemberSpi.findByEmail(memberRequest.getEmail())
+        Member member = queryMemberSpi.findByEmail(memberRequest.getContact())
                 .orElseThrow();
         // TODO: must check password
         if (!member.getPassword().equals(Password.of(memberRequest.getPassword()))) {

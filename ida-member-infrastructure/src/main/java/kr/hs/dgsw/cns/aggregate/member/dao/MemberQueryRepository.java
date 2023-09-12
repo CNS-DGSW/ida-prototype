@@ -38,7 +38,7 @@ public class MemberQueryRepository implements QueryMemberSpi {
     public Optional<Member> findByEmail(String email) {
         QMemberEntity memberEntity = QMemberEntity.memberEntity;
         MemberEntity entity = queryFactory.selectFrom(memberEntity)
-                .where(memberEntity.email.eq(email))
+                .where(memberEntity.contact.eq(email))
                 .fetchOne();
         if (entity == null) {
             return Optional.empty();

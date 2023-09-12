@@ -18,7 +18,7 @@ public class MemberEntity {
     @EmbeddedId
     private EmbeddedMemberId id;
 
-    private String email;
+    private String contact;
 
     @Convert(converter = PasswordConverter.class)
     private Password password;

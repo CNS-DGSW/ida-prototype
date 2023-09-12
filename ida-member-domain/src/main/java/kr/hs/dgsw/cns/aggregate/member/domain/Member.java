@@ -3,6 +3,7 @@ package kr.hs.dgsw.cns.aggregate.member.domain;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Role;
 import kr.hs.dgsw.cns.domain.MemberId;
 import kr.hs.dgsw.cns.aggregate.member.domain.value.Password;
+import kr.hs.dgsw.cns.domain.value.PhoneNumber;
 import lombok.*;
 
 @Getter
@@ -12,7 +13,7 @@ public class Member {
 
     private final MemberId id;
 
-    private final String email;
+    private final PhoneNumber contact;
 
     private Password password;
 
