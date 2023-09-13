@@ -20,6 +20,7 @@ buildscript {
 
         mysql = 'com.mysql:mysql-connector-j:8.0.32'
         jjwt = ['io.jsonwebtoken:jjwt-api:0.11.5', 'io.jsonwebtoken:jjwt-impl:0.11.5', 'io.jsonwebtoken:jjwt-jackson:0.11.5']
+        excel = ['org.apache.poi:poi:3.9', 'org.apache.poi:poi-ooxml:3.9', 'com.google.code.gson:gson:2.8.2', 'commons-io:commons-io:2.5']
     }
 }
 

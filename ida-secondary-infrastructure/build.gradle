@@ -22,6 +22,7 @@ dependencies {
 	runtimeOnly mysql
 	implementation springboot_jpa
 	implementation springboot_querydsl_impl
+	implementation excel
 	annotationProcessor springboot_querydsl_anno
 
 	testImplementation springboot_test
