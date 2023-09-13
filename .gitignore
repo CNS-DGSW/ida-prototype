@@ -172,5 +172,6 @@ gradle-app.setting
 ### useless folder
 images
 TODO.MD
+.idea
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,gradle
