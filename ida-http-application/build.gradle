@@ -23,6 +23,8 @@ dependencies {
     implementation project(':ida-applicant-domain')
     implementation project(':ida-admission-domain')
     implementation project(':ida-admission-infrastructure')
+    implementation project(':ida-secondary-domain')
+    implementation project(':ida-secondary-infrastructure')
 
     implementation project(':ida-jwt-infrastructure')
 
