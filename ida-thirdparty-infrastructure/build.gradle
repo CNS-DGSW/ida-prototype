@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springboot_version"
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group 'kr.hs.dgsw.cns'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+
+test {
+    useJUnitPlatform()
+}
