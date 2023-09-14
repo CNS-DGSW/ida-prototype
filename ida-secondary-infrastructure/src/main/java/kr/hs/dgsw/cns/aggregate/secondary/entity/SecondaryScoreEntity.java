@@ -1,9 +1,9 @@
-package kr.hs.dgsw.cns.aggregate.secondary;
+package kr.hs.dgsw.cns.aggregate.secondary.entity;
 
 import jakarta.persistence.*;
-import kr.hs.dgsw.cns.aggregate.secondary.value.AptitudeVO;
-import kr.hs.dgsw.cns.aggregate.secondary.value.ExamineeVO;
-import kr.hs.dgsw.cns.aggregate.secondary.value.InterviewVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.AptitudeVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.ExamineeVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.InterviewVO;
 import lombok.*;
 
 @Getter
