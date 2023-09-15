@@ -13,7 +13,9 @@ repositories {
 
 dependencies {
     implementation project(":ida-admission-domain")
+    implementation project(":ida-domain-common")
     implementation project(":ida-common")
+
 
     implementation json
 
