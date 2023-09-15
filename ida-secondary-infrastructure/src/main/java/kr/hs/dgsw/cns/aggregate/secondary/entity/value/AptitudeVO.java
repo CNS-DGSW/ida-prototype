@@ -1,4 +1,4 @@
-package kr.hs.dgsw.cns.aggregate.secondary.value;
+package kr.hs.dgsw.cns.aggregate.secondary.entity.value;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

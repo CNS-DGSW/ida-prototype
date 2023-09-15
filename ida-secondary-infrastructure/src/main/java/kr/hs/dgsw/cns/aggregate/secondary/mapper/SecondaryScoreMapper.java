@@ -1,14 +1,14 @@
 package kr.hs.dgsw.cns.aggregate.secondary.mapper;
 
 import kr.hs.dgsw.cns.aggregate.admission.entity.admission.mapper.AdmissionMapper;
-import kr.hs.dgsw.cns.aggregate.secondary.SecondaryScoreEntity;
-import kr.hs.dgsw.cns.aggregate.secondary.domain.domain.Secondary;
-import kr.hs.dgsw.cns.aggregate.secondary.domain.domain.value.Aptitude;
-import kr.hs.dgsw.cns.aggregate.secondary.domain.domain.value.Examinee;
-import kr.hs.dgsw.cns.aggregate.secondary.domain.domain.value.Interview;
-import kr.hs.dgsw.cns.aggregate.secondary.value.AptitudeVO;
-import kr.hs.dgsw.cns.aggregate.secondary.value.ExamineeVO;
-import kr.hs.dgsw.cns.aggregate.secondary.value.InterviewVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.SecondaryScoreEntity;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.Secondary;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Aptitude;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Examinee;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Interview;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.AptitudeVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.ExamineeVO;
+import kr.hs.dgsw.cns.aggregate.secondary.entity.value.InterviewVO;
 import kr.hs.dgsw.cns.global.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
