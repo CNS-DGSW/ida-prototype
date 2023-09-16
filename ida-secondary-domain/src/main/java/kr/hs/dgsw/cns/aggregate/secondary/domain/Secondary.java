@@ -21,4 +21,8 @@ public class Secondary {
     //심층 면접
     private Interview interview;
 
+    public void uploadAptitude(Aptitude aptitude) {
+        this.aptitude = aptitude;
+    }
+
 }
