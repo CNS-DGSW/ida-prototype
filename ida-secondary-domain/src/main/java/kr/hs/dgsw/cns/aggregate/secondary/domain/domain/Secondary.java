@@ -1,6 +1,8 @@
 package kr.hs.dgsw.cns.aggregate.secondary.domain.domain;
 
-import kr.hs.dgsw.cns.aggregate.secondary.domain.domain.value.*;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Aptitude;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Examinee;
+import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Interview;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
