@@ -109,6 +109,7 @@ jacocoTestCoverageVerification {
 
 group 'kr.hs.dgsw.cns'
 version '1.0-SNAPSHOT'
+jar.enabled = false
 
 subprojects {
     apply plugin: 'java'

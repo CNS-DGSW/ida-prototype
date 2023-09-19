@@ -11,6 +11,8 @@ repositories {
     mavenCentral()
 }
 
+bootJar.enabled = false
+
 dependencies {
     implementation project(':ida-common')
 
