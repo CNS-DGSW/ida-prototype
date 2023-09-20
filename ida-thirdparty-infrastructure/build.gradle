@@ -12,7 +12,10 @@ repositories {
 }
 
 dependencies {
+    implementation project(":ida-common")
+
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    annotationProcessor springboot_anno
 }
 
 dependencyManagement {
