@@ -108,7 +108,7 @@ public class JobAptitudeScoreServiceImpl implements JobAptitudeScoreService {
         for (ExcelScoreTemplate item : sortedList) {
             int cellIdx = 0;
             excelGenerator.setRowHeight(rowIdx, 625);
-            excelServiceConvertor.setJobAptitudeInhabit(excelGenerator, rowIdx, cellIdx, idx, item);
+            excelServiceConvertor.setAptitudeInhabit(excelGenerator, rowIdx, cellIdx, idx, item);
             rowIdx++;
             idx++;
         }
