@@ -20,9 +20,5 @@ public class ExamineeVO implements Serializable {
     @Serial
     private static final long serialVersionUID = -2238420653727913619L;
 
-    @OneToOne
-    @JoinColumn(name = "admission_id")
-    private AdmissionEntity admission;
-
     private Long examCode;
 }

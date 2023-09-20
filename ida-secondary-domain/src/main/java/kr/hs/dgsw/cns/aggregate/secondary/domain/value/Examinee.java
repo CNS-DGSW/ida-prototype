@@ -10,8 +10,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Examinee {
 
-    private Admission admission;
-
     //수험 범호
     private Long examCode;
 

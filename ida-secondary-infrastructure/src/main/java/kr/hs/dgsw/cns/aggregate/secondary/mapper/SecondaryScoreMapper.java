@@ -22,6 +22,8 @@ public class SecondaryScoreMapper implements Mapper<Secondary, SecondaryScoreEnt
 
     private static final InterviewMapper INTERVIEW_MAPPER = new InterviewMapper();
 
+    private final AdmissionMapper admissionMapper;
+
 
     @Override
     public SecondaryScoreEntity domainToEntity(Secondary domain) {
@@ -29,6 +31,7 @@ public class SecondaryScoreMapper implements Mapper<Secondary, SecondaryScoreEnt
                 .aptitude(APTITUDE_MAPPER.domainToEntity(domain.getAptitude()))
                 .examinee(EXAMINEE_MAPPER.domainToEntity(domain.getExaminee()))
                 .interview(INTERVIEW_MAPPER.domainToEntity(domain.getInterview()))
+                .admission(admissionMapper.domainToEntity(domain.getAdmission()))
                 .build();
     }
 
@@ -38,6 +41,7 @@ public class SecondaryScoreMapper implements Mapper<Secondary, SecondaryScoreEnt
                 .aptitude(APTITUDE_MAPPER.entityToDomain(entity.getAptitude()))
                 .examinee(EXAMINEE_MAPPER.entityToDomain(entity.getExaminee()))
                 .interview(INTERVIEW_MAPPER.entityToDomain(entity.getInterview()))
+                .admission(admissionMapper.entityToDomain(entity.getAdmission()))
                 .build();
     }
 
@@ -59,15 +63,11 @@ public class SecondaryScoreMapper implements Mapper<Secondary, SecondaryScoreEnt
         }
     }
 
-    @RequiredArgsConstructor
     static class ExamineeMapper implements Mapper<Examinee, ExamineeVO> {
-
-        private AdmissionMapper admissionMapper;
 
         @Override
         public ExamineeVO domainToEntity(Examinee domain) {
             return ExamineeVO.builder()
-                    .admission(admissionMapper.domainToEntity(domain.getAdmission()))
                     .examCode(domain.getExamCode())
                     .build();
         }
@@ -75,7 +75,6 @@ public class SecondaryScoreMapper implements Mapper<Secondary, SecondaryScoreEnt
         @Override
         public Examinee entityToDomain(ExamineeVO entity) {
             return Examinee.builder()
-                    .admission(admissionMapper.entityToDomain(entity.getAdmission()))
                     .examCode(entity.getExamCode())
                     .build();
         }

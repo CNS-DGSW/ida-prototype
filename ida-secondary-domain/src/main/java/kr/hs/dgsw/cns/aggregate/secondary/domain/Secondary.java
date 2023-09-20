@@ -1,5 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.secondary.domain;
 
+import kr.hs.dgsw.cns.aggregate.admission.domain.admission.Admission;
 import kr.hs.dgsw.cns.aggregate.secondary.domain.value.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,8 @@ public class Secondary {
 
     //심층 면접
     private Interview interview;
+
+    private Admission admission;
 
     public void uploadAptitude(Aptitude aptitude) {
         this.aptitude = aptitude;

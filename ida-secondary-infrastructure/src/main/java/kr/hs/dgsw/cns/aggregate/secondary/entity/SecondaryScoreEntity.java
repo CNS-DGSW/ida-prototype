@@ -1,6 +1,7 @@
 package kr.hs.dgsw.cns.aggregate.secondary.entity;
 
 import jakarta.persistence.*;
+import kr.hs.dgsw.cns.aggregate.admission.entity.admission.AdmissionEntity;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.value.AptitudeVO;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.value.ExamineeVO;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.value.InterviewVO;
@@ -24,5 +25,9 @@ public class SecondaryScoreEntity {
 
     @Embedded
     private InterviewVO interview;
+
+    @OneToOne
+    @JoinColumn(name = "admission_id")
+    private AdmissionEntity admission;
 
 }
