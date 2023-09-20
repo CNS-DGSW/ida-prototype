@@ -1,13 +1,17 @@
 package kr.hs.dgsw.cns.aggregate.secondary.util;
 
-import lombok.Data;
-import org.apache.poi.ss.usermodel.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.LinkedList;
 
-@Data
+@Getter @Setter
 public class ExcelGenerator {
     private LinkedList<CellData> cellDataList = new LinkedList<>();
     private XSSFWorkbook workbook = new XSSFWorkbook();
@@ -110,7 +114,7 @@ public class ExcelGenerator {
                 cell.setCellStyle(cellData.cellStyle);
             }
 
-            if (cellData.value.isEmpty() || cellData.value == null) {
+            if (cellData.value == null || cellData.value.isEmpty()) {
                 cell.setCellType(Cell.CELL_TYPE_BLANK);
             } else {
                 if (cellData.isNumber) {

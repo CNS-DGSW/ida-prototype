@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
-@RequestMapping("/job-aptitude")
+@RequestMapping("/aptitude")
 @RequiredArgsConstructor
 public class JobAptitudeScoreController {
 

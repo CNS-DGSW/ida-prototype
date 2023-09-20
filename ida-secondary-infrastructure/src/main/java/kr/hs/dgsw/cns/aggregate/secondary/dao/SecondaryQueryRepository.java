@@ -4,11 +4,13 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.hs.dgsw.cns.aggregate.secondary.domain.Secondary;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.QSecondaryScoreEntity;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.SecondaryScoreEntity;
+import kr.hs.dgsw.cns.aggregate.secondary.mapper.SecondaryScoreListMapper;
 import kr.hs.dgsw.cns.aggregate.secondary.mapper.SecondaryScoreMapper;
 import kr.hs.dgsw.cns.aggregate.secondary.spi.query.QuerySecondarySpi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class SecondaryQueryRepository implements QuerySecondarySpi {
     private final JPAQueryFactory queryFactory;
     private final SecondaryScoreMapper mapper;
+    private final SecondaryScoreListMapper listMapper;
 
     @Override
     public Optional<Secondary> findByExamCode(Long ExamCode) {
@@ -40,4 +43,15 @@ public class SecondaryQueryRepository implements QuerySecondarySpi {
         }
         return Optional.of(mapper.entityToDomain(entity));
     }
+
+    @Override
+    public List<Secondary> findByAll() {
+        QSecondaryScoreEntity secondaryScoreEntity = QSecondaryScoreEntity.secondaryScoreEntity;
+        List<SecondaryScoreEntity> entity = queryFactory.selectFrom(secondaryScoreEntity)
+                .fetch();
+        
+        return listMapper.entityToDomain(entity);
+
+    }
+
 }

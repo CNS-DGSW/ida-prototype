@@ -1,25 +1,29 @@
 package kr.hs.dgsw.cns.aggregate.secondary.service;
 
+import kr.hs.dgsw.cns.aggregate.applicant.domain.Applicant;
+import kr.hs.dgsw.cns.aggregate.applicant.spi.query.QueryApplicantSpi;
 import kr.hs.dgsw.cns.aggregate.secondary.domain.Secondary;
 import kr.hs.dgsw.cns.aggregate.secondary.domain.value.Aptitude;
 import kr.hs.dgsw.cns.aggregate.secondary.spi.query.CommandSecondarySpi;
-import kr.hs.dgsw.cns.aggregate.secondary.spi.query.QuerySecondarySql;
+import kr.hs.dgsw.cns.aggregate.secondary.spi.query.QuerySecondarySpi;
 import kr.hs.dgsw.cns.aggregate.secondary.spi.service.JobAptitudeScoreService;
-import kr.hs.dgsw.cns.aggregate.secondary.util.CellStyleManager;
-import kr.hs.dgsw.cns.aggregate.secondary.util.ExcelGenerator;
+import kr.hs.dgsw.cns.aggregate.secondary.util.*;
 import kr.hs.dgsw.cns.global.dto.FileRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -27,12 +31,15 @@ import java.io.OutputStream;
 @RequiredArgsConstructor
 public class JobAptitudeScoreServiceImpl implements JobAptitudeScoreService {
 
-    private final QuerySecondarySql querySecondarySql;
+    private final QuerySecondarySpi querySecondarySpi;
     private final CommandSecondarySpi commandSecondarySpi;
+    private final QueryApplicantSpi queryApplicantSpi;
+    private final ExcelSheetExtractor excelSheetExtractor;
+    private final ExcelServiceConvertor excelServiceConvertor;
 
     @Override
     public void uploadJobAptitude(FileRequest request) {
-        Sheet worksheet = getRows(request);
+        Sheet worksheet = excelSheetExtractor.getRows(request);
 
         for (int i = 3; i < worksheet.getPhysicalNumberOfRows(); i++) {
 
@@ -41,14 +48,16 @@ public class JobAptitudeScoreServiceImpl implements JobAptitudeScoreService {
             if (row != null) {
                 double doubleValue = row.getCell(1).getNumericCellValue();
                 Long examCode = Math.round(doubleValue);
-                Secondary secondary = querySecondarySql.findByExamCode(examCode)
+                Secondary secondary = querySecondarySpi.findByExamCode(examCode)
                         .orElseThrow();
 
                 int score = (int) row.getCell(7).getNumericCellValue();
 
-                secondary.uploadAptitude(Aptitude.builder()
+                Aptitude aptitude = Aptitude.builder()
                         .score(score)
-                        .build());
+                        .build();
+
+                secondary.uploadAptitude(aptitude);
 
                 commandSecondarySpi.save(secondary);
             }
@@ -57,6 +66,14 @@ public class JobAptitudeScoreServiceImpl implements JobAptitudeScoreService {
 
     @Override
     public void getJobAptitude(OutputStream outputStream) {
+        List<ExcelScoreTemplate> excel = new ArrayList<>();
+        List<Secondary> secondaryList = querySecondarySpi.findByAll();
+
+        for (Secondary secondary : secondaryList) {
+            Applicant applicant = queryApplicantSpi.findById(secondary.getAdmission().getApplicant().getId())
+                    .orElseThrow();
+            excel.add(new ExcelScoreTemplate(secondary, applicant));
+        }
         ExcelGenerator excelGenerator = new ExcelGenerator("직무적성_서식");
         Font boldFont = CellStyleManager.boldFont(excelGenerator);
         CellStyle cellStyleTitle = CellStyleManager.cellStyleTitle(excelGenerator);
@@ -82,29 +99,22 @@ public class JobAptitudeScoreServiceImpl implements JobAptitudeScoreService {
         excelGenerator.setRowHeight(2, 625);
         excelGenerator.setRowHeight(3, 600);
 
+        int idx = 1;
+        int rowIdx = 3;
+        List<ExcelScoreTemplate> sortedList = excel.stream()
+                .sorted(Comparator.comparing(ExcelScoreTemplate::getExamCode))
+                .toList();
+
+        for (ExcelScoreTemplate item : sortedList) {
+            int cellIdx = 0;
+            excelGenerator.setRowHeight(rowIdx, 625);
+            excelServiceConvertor.setJobAptitudeInhabit(excelGenerator, rowIdx, cellIdx, idx, item);
+            rowIdx++;
+            idx++;
+        }
+
         try {
             excelGenerator.generate().write(outputStream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Sheet getRows(FileRequest request) {
-        String extension = FilenameUtils.getExtension(request.getFilename());
-
-        if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            throw new RuntimeException("엑셀파일만 업로드 해주세요.");
-        }
-
-        Workbook workbook;
-        try{
-            if (extension.equals("xlsx")) {
-                workbook = new XSSFWorkbook(request.getInputStream());
-            } else {
-                workbook = new HSSFWorkbook(request.getInputStream());
-            }
-
-            return workbook.getSheetAt(0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
