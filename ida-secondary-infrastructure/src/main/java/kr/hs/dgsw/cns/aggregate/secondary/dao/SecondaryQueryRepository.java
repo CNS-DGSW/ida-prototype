@@ -5,7 +5,7 @@ import kr.hs.dgsw.cns.aggregate.secondary.domain.Secondary;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.QSecondaryScoreEntity;
 import kr.hs.dgsw.cns.aggregate.secondary.entity.SecondaryScoreEntity;
 import kr.hs.dgsw.cns.aggregate.secondary.mapper.SecondaryScoreMapper;
-import kr.hs.dgsw.cns.aggregate.secondary.spi.query.QuerySecondarySql;
+import kr.hs.dgsw.cns.aggregate.secondary.spi.query.QuerySecondarySpi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class SecondaryQueryRepository implements QuerySecondarySql {
+public class SecondaryQueryRepository implements QuerySecondarySpi {
     private final JPAQueryFactory queryFactory;
     private final SecondaryScoreMapper mapper;
 

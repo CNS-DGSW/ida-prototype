@@ -5,7 +5,7 @@ import kr.hs.dgsw.cns.domain.spi.QuerySpi;
 
 import java.util.Optional;
 
-public interface QuerySecondarySql extends QuerySpi<Secondary, Long> {
+public interface QuerySecondarySpi extends QuerySpi<Secondary, Long> {
     Optional<Secondary> findByExamCode(Long ExamCode);
 
     Optional<Secondary> findBySecondaryId(Long secondaryId);
