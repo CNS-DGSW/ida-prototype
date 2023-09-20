@@ -17,6 +17,7 @@ dependencies {
     implementation project(':ida-infrastructure-common')
     implementation project(':ida-member-domain')
     implementation project(':ida-applicant-domain')
+    implementation project(':ida-thirdparty-infrastructure')
 
     runtimeOnly mysql
     implementation springboot_jpa
