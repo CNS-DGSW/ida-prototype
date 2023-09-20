@@ -1,9 +1,6 @@
 package kr.hs.dgsw.cns.aggregate.secondary.entity.value;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import kr.hs.dgsw.cns.aggregate.admission.entity.admission.AdmissionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
