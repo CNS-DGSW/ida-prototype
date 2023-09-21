@@ -12,7 +12,10 @@ public class ExcelScoreTemplate {
     private String schoolName;
     private String firstApplyType;
     private String cityName;
-    private int score;
+    private int aptitudeScore;
+    private int studyScore;
+    private int computingScore;
+
 
     public ExcelScoreTemplate(Secondary secondary, Applicant applicant) {
         this.examCode = String.valueOf(secondary.getExaminee().getExamCode());
@@ -21,6 +24,8 @@ public class ExcelScoreTemplate {
         this.schoolName = String.valueOf(applicant.getPrivacy().getSchool().getCode());
         this.firstApplyType = null;
         this.cityName = applicant.getPrivacy().getAddress().getStreetAddress();
-        this.score = secondary.getAptitude().getScore();
+        this.aptitudeScore = secondary.getAptitude().getScore();
+        this.studyScore = secondary.getInterview().getStudyScore();
+        this.computingScore = secondary.getInterview().getComputingScore();
     }
 }
