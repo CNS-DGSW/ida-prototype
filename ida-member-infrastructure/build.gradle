@@ -20,6 +20,7 @@ dependencies {
     implementation project(':ida-thirdparty-infrastructure')
 
     runtimeOnly mysql
+    implementation redis
     implementation springboot_jpa
     implementation springboot_querydsl_impl
     annotationProcessor springboot_querydsl_anno

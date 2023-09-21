@@ -14,7 +14,7 @@ public class AuthCodeMapper implements Mapper<AuthCode, AuthCodeEntity> {
     public AuthCodeEntity domainToEntity(AuthCode domain) {
         return AuthCodeEntity.builder()
                 .code(domain.getCode())
-                .contact(domain.getContact().getNumber())
+                .phoneNumber(domain.getPhoneNumber().getNumber())
                 .expirationTime(domain.getExpirationTime())
                 .build();
     }
@@ -23,7 +23,7 @@ public class AuthCodeMapper implements Mapper<AuthCode, AuthCodeEntity> {
     public AuthCode entityToDomain(AuthCodeEntity entity) {
         return AuthCode.builder()
                 .code(entity.getCode())
-                .contact(PhoneNumber.of(entity.getContact()))
+                .phoneNumber(PhoneNumber.of(entity.getPhoneNumber()))
                 .expirationTime(entity.getExpirationTime())
                 .build();
     }

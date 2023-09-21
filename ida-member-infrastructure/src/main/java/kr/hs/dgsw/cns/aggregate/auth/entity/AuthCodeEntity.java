@@ -15,7 +15,7 @@ public class AuthCodeEntity {
     private String code;
 
     @Indexed
-    private String contact;
+    private String phoneNumber;
 
     @TimeToLive
     private Integer expirationTime;

@@ -5,7 +5,6 @@ import kr.hs.dgsw.cns.global.sms.feign.NaverSmsClient;
 import kr.hs.dgsw.cns.global.sms.feign.dto.request.NaverSmsRequest;
 import kr.hs.dgsw.cns.global.sms.feign.property.NaverSmsProperties;
 import kr.hs.dgsw.cns.global.sms.util.NaverSmsSignatureGenerator;
-import kr.hs.dgsw.cns.global.util.RandomNumberGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +13,19 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SendAuthMessageService {
+public class SendAuthMessageSmsService {
     private final NaverSmsClient naverSmsClient;
     private final NaverSmsProperties naverSmsProperties;
 
     public void send(
-            SendMessageRequest request
+            SendMessageRequest request,
+            String code
     ) {
         List<NaverSmsRequest.Message> messages = new ArrayList<>();
         messages.add(
                 NaverSmsRequest.Message.builder()
                         .to(request.getContact())
-                        .content(authMessage(RandomNumberGenerator.generateRandomNumberWithString(6)))
+                        .content(authMessage(code))
                         .build()
         );
 
