@@ -111,15 +111,15 @@ public class ExtraScoreUseCase {
     }
 
     public double countLeaderShip(List<LeaderShipPoint> leaderShipPoints) {
-        HashSet<Map<Grade, Semester>> uniqueCombinations = new HashSet<>();
+        AtomicReference<Double> leaderShipScoreSum = new AtomicReference<>(0.0);
+
         leaderShipPoints.forEach(it -> {
-            Map<Grade, Semester> combinationMap = new HashMap<>();
-            combinationMap.put(it.getGrade(), it.getSemester());
             if (it.isCheck()) {
-                uniqueCombinations.add(combinationMap);
+                leaderShipScoreSum.updateAndGet(v -> v+0.5);
             }
         });
-        return uniqueCombinations.size() * 0.5 > 2 ? 2 : uniqueCombinations.size() * 0.5;
+
+        return leaderShipScoreSum.get() >= 2.0 ? 2.0 : leaderShipScoreSum.get();
     }
 
 
