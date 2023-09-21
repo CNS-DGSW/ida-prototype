@@ -26,7 +26,7 @@ public class AptitudeScoreController {
         }
 
         try {
-            jobAptitudeScoreUseCase.uploadJobAptitude(new FileRequest(file.getContentType(),
+            jobAptitudeScoreUseCase.uploadAptitude(new FileRequest(file.getContentType(),
                     file.getOriginalFilename(),
                     file.getInputStream()));
         } catch (IOException e) {
@@ -36,14 +36,14 @@ public class AptitudeScoreController {
 
     @GetMapping("/download")
     public void getJobAptitude(HttpServletResponse response) {
-        String fileNameOrg = URLEncoder.encode("직무적성_서식.xlsx", StandardCharsets.UTF_8);
+        String fileNameOrg = URLEncoder.encode("심층면접1.xlsx", StandardCharsets.UTF_8);
 
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileNameOrg);
 
         try {
             ServletOutputStream out = response.getOutputStream();
-            jobAptitudeScoreUseCase.getJobAptitude(out);
+            jobAptitudeScoreUseCase.getAptitude(out);
             out.flush();
             out.close();
         } catch (IOException e) {

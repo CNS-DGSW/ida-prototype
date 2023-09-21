@@ -33,8 +33,8 @@ import java.util.List;
 public class ScoreServiceImpl implements ScoreService {
     private final QuerySecondarySpi querySecondarySql;
     private final CommandSecondarySpi commandSecondarySpi;
-    private final ExcelSheetExtractor excelSheetExtractor;
     private final QueryApplicantSpi queryApplicantSpi;
+    private final ExcelSheetExtractor excelSheetExtractor;
     private final ExcelServiceConvertor excelServiceConvertor;
 
     @Override
@@ -76,7 +76,7 @@ public class ScoreServiceImpl implements ScoreService {
         for (Secondary secondary : secondaryList) {
             Applicant applicant = queryApplicantSpi.findById(secondary.getAdmission().getApplicant().getId())
                     .orElseThrow();
-            excel.add(new ExcelScoreTemplate(secondary, applicant));
+            excel.add(new ExcelScoreTemplate(secondary, applicant, secondary.getAdmission()));
         }
 
         ExcelGenerator excelGenerator = new ExcelGenerator(requestDto.getFileName());
