@@ -18,6 +18,7 @@ public class ExcelServiceConvertor {
             case COMPUTING -> excelGenerator.setValue(rowIdx, mutableCellIdx, userInfo.getComputingScore());
             case STUDY -> excelGenerator.setValue(rowIdx, mutableCellIdx, userInfo.getStudyScore());
             case APTITUDE -> excelGenerator.setValue(rowIdx, mutableCellIdx, userInfo.getAptitudeScore());
+            case FINAL -> excelGenerator.setValue(rowIdx, mutableCellIdx, userInfo.getTotalScore());
         }
     }
 }

@@ -14,11 +14,11 @@ import java.io.OutputStream;
 public class AptitudeScoreUseCase {
     private final ScoreService scoreService;
 
-    public void uploadJobAptitude(FileRequest request) {
+    public void uploadAptitude(FileRequest request) {
         scoreService.uploadScore(request, ScoreType.APTITUDE);
     }
 
-    public void getJobAptitude(OutputStream outputStream) {
+    public void getAptitude(OutputStream outputStream) {
         ExcelRequestDto requestDto = ExcelRequestDto.builder()
                 .fileName("직무적성_서식")
                 .title("2023학년도 신입생 2차 전형 직무적성 점수 일람표")
