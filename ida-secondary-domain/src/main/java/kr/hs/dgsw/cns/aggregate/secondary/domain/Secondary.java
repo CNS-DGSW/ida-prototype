@@ -28,4 +28,8 @@ public class Secondary {
         this.aptitude = aptitude;
     }
 
+    public void uploadInterview(Interview interview) {
+        this.interview = interview;
+    }
+
 }

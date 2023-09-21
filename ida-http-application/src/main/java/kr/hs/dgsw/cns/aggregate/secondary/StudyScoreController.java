@@ -2,7 +2,7 @@ package kr.hs.dgsw.cns.aggregate.secondary;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
-import kr.hs.dgsw.cns.aggregate.secondary.usecase.JobAptitudeScoreUseCase;
+import kr.hs.dgsw.cns.aggregate.secondary.usecase.StudyScoreUseCase;
 import kr.hs.dgsw.cns.global.dto.FileRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,20 +13,20 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @RestController
-@RequestMapping("/aptitude")
+@RequestMapping("/interview/study")
 @RequiredArgsConstructor
-public class JobAptitudeScoreController {
+public class StudyScoreController {
 
-    private final JobAptitudeScoreUseCase jobAptitudeScoreUseCase;
+    private final StudyScoreUseCase studyScoreUseCase;
 
     @PutMapping("/upload")
-    public void uploadJobAptitude(@RequestParam MultipartFile file) {
+    public void uploadComputingScore(@RequestParam MultipartFile file) {
         if (file.isEmpty()) {
             return;
         }
 
         try {
-            jobAptitudeScoreUseCase.uploadJobAptitude(new FileRequest(file.getContentType(),
+            studyScoreUseCase.uploadStudyScore(new FileRequest(file.getContentType(),
                     file.getOriginalFilename(),
                     file.getInputStream()));
         } catch (IOException e) {
@@ -35,15 +35,15 @@ public class JobAptitudeScoreController {
     }
 
     @GetMapping("/download")
-    public void getJobAptitude(HttpServletResponse response) {
-        String fileNameOrg = URLEncoder.encode("직무적성_서식.xlsx", StandardCharsets.UTF_8);
+    public void getInterview(HttpServletResponse response) {
+        String fileNameOrg = URLEncoder.encode("심층면접1.xlsx", StandardCharsets.UTF_8);
 
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileNameOrg);
 
         try {
             ServletOutputStream out = response.getOutputStream();
-            jobAptitudeScoreUseCase.getJobAptitude(out);
+            studyScoreUseCase.getStudyScore(out);
             out.flush();
             out.close();
         } catch (IOException e) {
