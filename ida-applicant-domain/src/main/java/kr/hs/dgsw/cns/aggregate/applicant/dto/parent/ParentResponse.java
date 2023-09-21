@@ -19,13 +19,10 @@ public class ParentResponse {
 
     private final String telephone;
 
-    @JsonProperty("street_address")
     private final String streetAddress;
 
-    @JsonProperty("detail_address")
     private final String detailAddress;
 
-    @JsonProperty("zip_code")
     private final short zipCode;
 
     public ParentResponse(ParentInfo parentInfo, Address address) {

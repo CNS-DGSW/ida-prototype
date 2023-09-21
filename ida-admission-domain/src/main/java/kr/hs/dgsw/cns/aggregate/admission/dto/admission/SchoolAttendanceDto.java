@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor @NoArgsConstructor
 public class SchoolAttendanceDto {
-
-    @JsonProperty("attendance_points")
     private List<AttendancePoint> attendancePoints;
 
 }

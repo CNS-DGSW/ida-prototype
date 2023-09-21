@@ -24,13 +24,10 @@ public class UpdateParentRequest {
     private String telephone;
 
     // TODO: 프론트와 디자이너와 상의 하에 분리해야하는 것이 좋을 듯 함
-    @JsonProperty("street_address")
     private String streetAddress;
 
-    @JsonProperty("detail_address")
     private String detailAddress;
 
-    @JsonProperty("zip_code")
     private short zipCode;
 
     public ParentInfo toParent() {
