@@ -4,13 +4,11 @@ import kr.hs.dgsw.cns.aggregate.admission.domain.admission.Admission;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.SchoolScore;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.Score;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.constraint.Grade;
-import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.constraint.Semester;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.AttendancePoint;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.LeaderShipPoint;
 import kr.hs.dgsw.cns.aggregate.admission.domain.score.value.grade.VolunteerPoint;
 import kr.hs.dgsw.cns.aggregate.admission.spi.query.admission.QueryAdmissionSpi;
 import kr.hs.dgsw.cns.aggregate.admission.spi.query.score.CommandScoreSpi;
-import kr.hs.dgsw.cns.aggregate.school.domain.School;
 import kr.hs.dgsw.cns.global.annotations.UseCase;
 import lombok.RequiredArgsConstructor;
 
