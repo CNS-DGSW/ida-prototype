@@ -8,9 +8,9 @@ public class ExcelServiceConvertor {
     public void setInhabit(ExcelGenerator excelGenerator, int rowIdx, int cellIdx, int idx, ExcelScoreTemplate userInfo, ScoreType scoreType) {
         int mutableCellIdx = cellIdx;
         excelGenerator.setValue(rowIdx, mutableCellIdx++, Integer.toString(idx), true);
-        excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getExamCode(), true);
+        excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getExamCode());
         excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getUserName());
-        excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getSex());
+        excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getGender());
         excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getSchoolName());
         excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getFirstApplyType());
         excelGenerator.setValue(rowIdx, mutableCellIdx++, userInfo.getCityName());

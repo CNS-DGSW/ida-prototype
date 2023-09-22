@@ -44,21 +44,4 @@ public class CellStyleManager {
 
         return cellStyleSubtitle;
     }
-
-    public static CellStyle cellStyleDouble(ExcelGenerator excelGenerator) {
-        CellStyle cellStyleDouble = excelGenerator.getWorkbook().createCellStyle();
-        cellStyleDouble.cloneStyleFrom(excelGenerator.getGlobalStyle());
-        cellStyleDouble.setDataFormat(excelGenerator.getWorkbook().createDataFormat().getFormat("#,##0.000"));
-
-        return cellStyleDouble;
-    }
-
-    public static CellStyle cellStyleBoldDouble(ExcelGenerator excelGenerator) {
-        CellStyle cellStyleBoldDouble = excelGenerator.getWorkbook().createCellStyle();
-        cellStyleBoldDouble.cloneStyleFrom(excelGenerator.getGlobalStyle());
-        cellStyleBoldDouble.setDataFormat(excelGenerator.getWorkbook().createDataFormat().getFormat("#,##0.000"));
-        cellStyleBoldDouble.setFont(boldFont(excelGenerator));
-
-        return cellStyleBoldDouble;
-    }
 }

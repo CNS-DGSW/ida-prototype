@@ -51,12 +51,6 @@ public class ExcelGenerator {
         }
     }
 
-    public void setColumnWidth(int[] list) {
-        for (int i = 0; i < list.length; i++) {
-            sheet.setColumnWidth(startColIdx + i, list[i]);
-        }
-    }
-
     public void setColumnWidth(int[] list, boolean skip) {
         for (int i = 0; i < list.length; i++) {
             if (skip) {
@@ -80,7 +74,7 @@ public class ExcelGenerator {
         cellDataList.add(new CellData(rowIdx, cellIdx, data, false, null));
     }
 
-    public void setValue(int rowIdx, int cellIdx, int data) {
+    public void setValue(int rowIdx, int cellIdx, Long data) {
         cellDataList.add(new CellData(rowIdx, cellIdx, String.valueOf(data), true, null));
     }
 
@@ -94,14 +88,6 @@ public class ExcelGenerator {
 
     public void setValue(int rowIdx, int cellIdx, String data, CellStyle cellStyle) {
         cellDataList.add(new CellData(rowIdx, cellIdx, data, false, cellStyle));
-    }
-
-    public void setValue(int rowIdx, int cellIdx, String data, boolean isNumber, CellStyle cellStyle) {
-        cellDataList.add(new CellData(rowIdx, cellIdx, data, isNumber, cellStyle));
-    }
-
-    public void setValue(int rowIdx, int cellIdx, double data, CellStyle cellStyle) {
-        cellDataList.add(new CellData(rowIdx, cellIdx, String.valueOf(data), true, cellStyle));
     }
 
     public XSSFWorkbook generate() {
