@@ -13,6 +13,6 @@ public class LeaderShipPoint {
 
     private Semester semester;
 
-    private boolean check;
+    private boolean isCheck;
 
 }
