@@ -36,9 +36,9 @@ public class SchoolScoreEntity extends AbstractScore {
     @CollectionTable(name = "volunteer", joinColumns = @JoinColumn(name = "score_id"))
     private List<VolunteerVO> volunteers;
 
-    @OrderColumn(name = "leaderShip_idx")
+    @OrderColumn(name = "leader_ship_idx")
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "leaderShip", joinColumns = @JoinColumn(name = "leadership_id"))
+    @CollectionTable(name = "leader_ship", joinColumns = @JoinColumn(name = "score_id"))
     private List<LeaderShipVO> leaderShips;
 
     @Convert(converter = PointConverter.class)

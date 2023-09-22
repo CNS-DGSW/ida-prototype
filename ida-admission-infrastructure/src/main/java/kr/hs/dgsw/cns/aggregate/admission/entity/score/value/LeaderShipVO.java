@@ -26,6 +26,6 @@ public class LeaderShipVO implements Serializable {
     @Enumerated(EnumType.STRING)
     private Semester semester;
 
-    private boolean check;
+    private boolean isCheck;
 
 }
