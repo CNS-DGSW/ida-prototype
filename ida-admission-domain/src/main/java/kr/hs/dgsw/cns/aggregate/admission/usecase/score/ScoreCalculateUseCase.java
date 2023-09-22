@@ -44,7 +44,6 @@ public class ScoreCalculateUseCase {
                 score.setSpecialScore(0.0);
             }
             else {
-                // TODO: we need school domain to use
                 double gradeScore = scoreService.calculateScore(grades, schoolScore.getAttendancePoints(), true);
                 score.setGeneralScore(Math.round((0.8 * gradeScore) * 1000) / 1000.0);
                 score.setSpecialScore(Math.round((0.5 * gradeScore) * 1000) / 1000.0);
